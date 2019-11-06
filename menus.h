@@ -1,0 +1,4 @@
+#ifndef NAGYHAZI_MENUS_H
+#define NAGYHAZI_MENUS_H
+
+#endif //NAGYHAZI_MENUS_H
