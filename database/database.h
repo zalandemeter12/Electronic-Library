@@ -3,8 +3,9 @@
 
 #include "../definitions.h"
 
-bool saveDatabase();
-bool loadDatabase();
-void searchDatabase();
+list createList();
+bool saveDatabase(list *records);
+bool loadDatabase(list *records);
+void searchDatabase(list *records);
 
 #endif //NAGYHAZI_DATABASE_H
