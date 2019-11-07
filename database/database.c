@@ -25,7 +25,7 @@ bool loadDatabase(list *recordList){
             /* Eldobja az első sort. */
             char line[50+50+50+4+3+1]; fgets(line,158,fp);
 
-            /* Betölti a rekordokat a listába. */
+            /* Beolvassa a fájl rekordokat tartalmazó sorait*/
             for (int recordIndex = 0; recordIndex < recordNumber; recordIndex++) {
                 fgets(line, 158, fp);
                 listElement *tempElement = newElement();
@@ -48,7 +48,7 @@ bool loadDatabase(list *recordList){
                         counter++;
                     }
                 }
-                /* A létrehozott record változót a lista végére fűzi. */
+                /* A létrehozott lista elemet a lista végére fűzi. */
                 appendElementLast(recordList, tempElement);
             }
         }
