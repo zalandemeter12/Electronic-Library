@@ -6,10 +6,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-typedef struct listSentinel {
-    struct listElement *next, *previous;
-} listSentinel;
-
 typedef struct listElement {
     char *author;
     char *title;
@@ -20,7 +16,7 @@ typedef struct listElement {
 
 typedef struct list {
     int elementNumber;
-    listSentinel *first, *last;
+    listElement *first, *last;
 } list;
 
 

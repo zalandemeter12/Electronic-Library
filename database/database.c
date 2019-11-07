@@ -3,8 +3,8 @@
 
 list createList(){
     list newList;
-    listSentinel *first = (struct listSentinel *) malloc(sizeof(struct listSentinel));
-    listSentinel *last = (struct listSentinel *) malloc(sizeof(struct listSentinel));
+    listElement *first = (struct listElement *) malloc(sizeof(struct listElement));
+    listElement *last = (struct listElement *) malloc(sizeof(struct listElement));
     first->next = last; first->previous = NULL;
     last->next = NULL; last->previous = first;
     newList.first = first;
@@ -14,18 +14,19 @@ list createList(){
 }
 
 bool loadDatabase(list *recordList){
-    FILE* fp = fopen("database.txt","rt");
+    FILE* fp = fopen("../database/database.txt","rt");
     if (fp != NULL) {
 
         /* A fájl első sorából beolvassa, hogy hány rekordot tárol a fájl. */
-        fscanf(fp, "%d",&recordList->elementNumber);
+        int recordNumber;
+        fscanf(fp, "%d",&recordNumber);
 
-        if (recordList->elementNumber != 0){
+        if (recordNumber != 0){
             /* Eldobja az első sort. */
             char line[50+50+50+4+3+1]; fgets(line,158,fp);
 
             /* Betölti a rekordokat a listába. */
-            for (int recordIndex = 0; recordIndex < recordList->elementNumber; recordIndex++) {
+            for (int recordIndex = 0; recordIndex < recordNumber; recordIndex++) {
                 fgets(line, 158, fp);
                 listElement *tempElement = newElement();
                 char *token;
