@@ -1,25 +1,10 @@
-#include "database.h"
-#include "../records/records.h"
+#include "../definitions.h"
 
-list createList(){
-    list newList;
-    listElement *first = (struct listElement *) malloc(sizeof(struct listElement));
-    listElement *last = (struct listElement *) malloc(sizeof(struct listElement));
-    first->next = last; first->previous = NULL;
-    last->next = NULL; last->previous = first;
-    newList.first = first;
-    newList.last = last;
-    newList.elementNumber = 0;
-    return newList;
-}
-
-bool loadDatabase(list *recordList){
+bool loadDatabase(list recordList){
     FILE* fp = fopen("../database/database.txt","rt");
     if (fp != NULL) {
-
         /* A fájl első sorából beolvassa, hogy hány rekordot tárol a fájl. */
-        int recordNumber;
-        fscanf(fp, "%d",&recordNumber);
+        int recordNumber; fscanf(fp, "%d",&recordNumber);
 
         if (recordNumber != 0){
             /* Eldobja az első sort. */
@@ -29,26 +14,7 @@ bool loadDatabase(list *recordList){
             for (int recordIndex = 0; recordIndex < recordNumber; recordIndex++) {
                 fgets(line, 158, fp);
                 listElement *tempElement = newElement();
-                char *token;
-
-                /* Kicseréli a sor vége karaktert sztring lezáró nullára. */
-                if((token = strchr(line, '\n')) != NULL) *token = '\0';
-
-                /* Felbontja a rekordsort 4 különféle adattípusra. */
-                if((token = strtok(line, "|")) != NULL){
-                    strcpy(tempElement->author,token);
-                    int counter = 0;
-                    while((token = strtok(NULL, "|")) != NULL){
-                        if (counter == 0) strcpy(tempElement->title,token);
-                        if (counter == 1) strcpy(tempElement->genre,token);
-                        if (counter == 2) {
-                            int num = atoi(token);
-                            tempElement->year = num;
-                        }
-                        counter++;
-                    }
-                }
-                /* A létrehozott lista elemet a lista végére fűzi. */
+                dataSplit(line,tempElement);
                 appendElementLast(recordList, tempElement);
             }
         }
@@ -60,5 +26,56 @@ bool loadDatabase(list *recordList){
     else{
         fclose(fp);
         return false;
+    }
+}
+
+bool saveDatabase(list recordList){
+    FILE* fp = fopen("../database/database.txt","wt");
+    if (fp != NULL) {
+        fprintf(fp,"%d\n",*recordList.elementNumber);
+
+        listElement *moving = recordList.first->next;
+        while (moving != recordList.last){
+            fprintf(fp,"%s|%s|%s|%d\n",moving->author,moving->title,moving->genre,moving->year);
+            moving = moving->next;
+        }
+
+        fclose(fp);
+        return true;
+    }
+
+    else{
+        fclose(fp);
+        return false;
+    }
+}
+
+void searchDatabase(list recordList, searchCondition condition) {
+    /*
+    for (int recordIndex = 0; recordIndex < recordNumber; recordIndex++) {
+        switch (condition) {
+            case author:
+                if (strstr(database[recordIndex].author,term) != NULL) printRecord(database[recordIndex]); break;
+            case title:
+                if (strstr(database[recordIndex].title,term) != NULL) printRecord(database[recordIndex]); break;
+            case genre:
+                if (strstr(database[recordIndex].genre,term) != NULL) printRecord(database[recordIndex]); break;
+            case year:
+                if (*database[recordIndex].year == atoi(term)) printRecord(database[recordIndex]); break;
+        }
+    }
+    */
+    listElement *moving = recordList.first->next;
+    while (moving != recordList.last){
+        printf("|%-50s|\t|%-50s|\t|%-50s|\t|%-4d|\n",moving->author,moving->title,moving->genre,moving->year);
+        moving = moving->next;
+    }
+}
+
+void printDatabase(list recordList){
+    listElement *moving = recordList.first->next;
+    while (moving != recordList.last){
+        printRecord(moving);
+        moving = moving->next;
     }
 }

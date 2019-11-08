@@ -1,37 +1,28 @@
-#include "records.h"
+#include "../definitions.h"
 
-listElement *newElement(){
-    listElement *newElement  = (struct listElement*) malloc(sizeof(struct listElement));
-    char* author =(char*) malloc(51 * sizeof(char));
-    char* title =(char*) malloc(51 * sizeof(char));
-    char* genre =(char*) malloc(51 * sizeof(char));
-    newElement->author = author;
-    newElement->title = title;
-    newElement->genre = genre;
-    if (newElement != NULL) return newElement;
-    else return NULL;
+bool addRecord(list thisList){
+    listElement *tempElement = newElement();
+    if (tempElement == NULL) return false;
+    char recordLine[158];
+    scanf("%s",recordLine);
+    dataSplit(recordLine,tempElement);
+    appendElementLast(thisList,tempElement);
+    return true;
 }
 
-void appendElementFirst(list *thisList, listElement *thisElement){
-    thisElement->previous = thisList->first;
-    thisElement->next = thisList->first->next;
-    thisList->first->next->previous = thisElement;
-    thisList->first->next = thisElement;
-    thisList->elementNumber++;
+bool modifyRecord(listElement *thisElement){
+    if (thisElement == NULL) return false;
+    char recordLine[158];
+    scanf("%s",recordLine);
+    dataSplit(recordLine,thisElement);
+    return true;
 }
 
-void appendElementLast(list *thisList, listElement * thisElement){
-    thisElement->next = thisList->last;
-    thisElement->previous = thisList->last->previous;
-    thisList->last->previous->next = thisElement;
-    thisList->last->previous = thisElement;
-    thisList->elementNumber++;
+bool removeRecord(listElement *thisElement){
+    if (thisElement == NULL) return false;
+    thisElement->previous->next = thisElement->next;
+    thisElement->next->previous = thisElement->previous;
+    freeElement(thisElement);
+    return true;
 }
 
-bool modifyElement(list *thisList, listElement * thisElement){
-
-}
-
-bool removeElement(list *thisList, listElement * thisElement){
-
-}

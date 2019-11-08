@@ -15,10 +15,19 @@ typedef struct listElement {
 } listElement;
 
 typedef struct list {
-    int elementNumber;
+    int *elementNumber;
     listElement *first, *last;
 } list;
 
+typedef enum searchCondition{
+    author, title, genre, year
+} searchCondition;
+
+#include "database/database.h"
+#include "lists/lists.h"
+#include "menus/menus.h"
+#include "records/records.h"
+#include "utils/utils.h"
 
 
 #endif //NAGYHAZI_DEFINITIONS_H
