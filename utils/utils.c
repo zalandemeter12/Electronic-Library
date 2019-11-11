@@ -16,6 +16,8 @@ void dataSplit(char *recordLine, listElement *thisElement){
                 if (counter == 0) strcpy(thisElement->title,token);
                 if (counter == 1) strcpy(thisElement->genre,token);
                 if (counter == 2) {
+
+                    /* Átkonvertálja a kapott sztringet egy integerré. Nem kezeli az ebből adódó hibákat. */
                     int num = atoi(token);
                     thisElement->year = num;
                 }

@@ -17,8 +17,14 @@ bool loadDatabase(list recordList){
             /* Beolvassa a fájl rekordokat tartalmazó sorait*/
             for (int recordIndex = 0; recordIndex < recordNumber; recordIndex++) {
                 fgets(line, 158, fp);
+
+                /* Létrehoz egy új listaelemet */
                 listElement *tempElement = newElement();
+
+                /* A rekordsor adatait beolvassa ebbe a listaelembe.*/
                 dataSplit(line,tempElement);
+
+                /* Hozzáfűzi az így kapott elemet a lista végéhez. */
                 appendElementLast(recordList, tempElement);
             }
         }
@@ -26,7 +32,7 @@ bool loadDatabase(list recordList){
         return true;
     }
 
-        /* Ha a fájl megnyitása során hibába ütközik, hamis értékkel tér vissza. */
+    /* Ha a fájl megnyitása során hibába ütközik, hamis értékkel tér vissza. */
     else{
         fclose(fp);
         return false;
@@ -36,8 +42,11 @@ bool loadDatabase(list recordList){
 bool saveDatabase(list recordList){
     FILE* fp = fopen("../database/database.txt","wt");
     if (fp != NULL) {
+        /* A létrehozott fájl első sorába elmenti a tárolt rekordok számát. */
         fprintf(fp,"%d\n",*recordList.elementNumber);
 
+        /* A tárolt rekordokat fájlba írja a megfelelő formátum szerint.
+         * [    szerző|cím|műfaj|kiadási_év     ] */
         listElement *moving = recordList.first->next;
         while (moving != recordList.last){
             fprintf(fp,"%s|%s|%s|%d\n",moving->author,moving->title,moving->genre,moving->year);
@@ -48,6 +57,7 @@ bool saveDatabase(list recordList){
         return true;
     }
 
+    /* Ha a fájl létrehozása során hibába ütközik, hamis értékkel tér vissza. */
     else{
         fclose(fp);
         return false;
@@ -55,6 +65,7 @@ bool saveDatabase(list recordList){
 }
 
 void printDatabase(list recordList){
+    /* Végig iterál a lista összes elemén és formázva kiírja őket a kijelzőre. */
     listElement *moving = recordList.first->next;
     while (moving != recordList.last){
         printRecord(moving);
