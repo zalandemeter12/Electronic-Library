@@ -23,11 +23,5 @@ typedef enum searchCondition{
     author, title, genre, year
 } searchCondition;
 
-#include "database/database.h"
-#include "lists/lists.h"
-#include "menus/menus.h"
-#include "records/records.h"
-#include "utils/utils.h"
-
 
 #endif //NAGYHAZI_DEFINITIONS_H

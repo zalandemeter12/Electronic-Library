@@ -1,4 +1,6 @@
-#include "../definitions.h"
+#include "lists.h"
+
+#include "../debugmalloc/debugmalloc.h"
 
 list createList(){
     list newList;
@@ -10,6 +12,7 @@ list createList(){
     newList.first = first;
     newList.last = last;
     newList.elementNumber = elementNumber;
+    *newList.elementNumber = 0;
     return newList;
 }
 
@@ -21,23 +24,21 @@ void removeList(list thisList){
         freeElement(moving);
         moving = next;
     }
-    freeElement(thisList.first);
-    freeElement(thisList.last);
+    free(thisList.first);
+    free(thisList.last);
     free(thisList.elementNumber);
 }
 
-
-
 listElement *newElement(){
     listElement *newElement  = (struct listElement*) malloc(sizeof(struct listElement));
+    if (newElement == NULL) return NULL;
     char* author =(char*) malloc(51 * sizeof(char));
     char* title =(char*) malloc(51 * sizeof(char));
     char* genre =(char*) malloc(51 * sizeof(char));
     newElement->author = author;
     newElement->title = title;
     newElement->genre = genre;
-    if (newElement != NULL) return newElement;
-    else return NULL;
+    return newElement;
 }
 
 void freeElement(listElement *thisElement){

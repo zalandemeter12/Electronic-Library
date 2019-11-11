@@ -1,4 +1,8 @@
-#include "../definitions.h"
+#include "database.h"
+#include "../utils/utils.h"
+#include "../lists/lists.h"
+
+#include "../debugmalloc/debugmalloc.h"
 
 bool loadDatabase(list recordList){
     FILE* fp = fopen("../database/database.txt","rt");
@@ -47,28 +51,6 @@ bool saveDatabase(list recordList){
     else{
         fclose(fp);
         return false;
-    }
-}
-
-void searchDatabase(list recordList, searchCondition condition) {
-    /*
-    for (int recordIndex = 0; recordIndex < recordNumber; recordIndex++) {
-        switch (condition) {
-            case author:
-                if (strstr(database[recordIndex].author,term) != NULL) printRecord(database[recordIndex]); break;
-            case title:
-                if (strstr(database[recordIndex].title,term) != NULL) printRecord(database[recordIndex]); break;
-            case genre:
-                if (strstr(database[recordIndex].genre,term) != NULL) printRecord(database[recordIndex]); break;
-            case year:
-                if (*database[recordIndex].year == atoi(term)) printRecord(database[recordIndex]); break;
-        }
-    }
-    */
-    listElement *moving = recordList.first->next;
-    while (moving != recordList.last){
-        printf("|%-50s|\t|%-50s|\t|%-50s|\t|%-4d|\n",moving->author,moving->title,moving->genre,moving->year);
-        moving = moving->next;
     }
 }
 

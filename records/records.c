@@ -1,4 +1,8 @@
-#include "../definitions.h"
+#include "records.h"
+#include "../lists/lists.h"
+#include "../utils/utils.h"
+
+#include "../debugmalloc/debugmalloc.h"
 
 bool addRecord(list thisList){
     listElement *tempElement = newElement();

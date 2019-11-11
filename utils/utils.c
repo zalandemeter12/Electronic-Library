@@ -1,4 +1,6 @@
-#include "../definitions.h"
+#include "utils.h"
+
+#include "../debugmalloc/debugmalloc.h"
 
 void dataSplit(char *recordLine, listElement *thisElement){
 
