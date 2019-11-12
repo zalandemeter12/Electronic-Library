@@ -3,6 +3,8 @@
 
 #include "../definitions.h"
 
+void printMenu (char **menuElements, int elementNumber, int selectedIndex, int x, int y);
+
 void menu();
 void recordMenu();
 void databaseMenu();

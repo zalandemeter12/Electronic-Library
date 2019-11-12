@@ -2,6 +2,17 @@
 
 #include "../debugmalloc/debugmalloc.h"
 
+#if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
+    #include <windows.h>
+#endif
+
+void fullscreen(){
+    keybd_event(VK_MENU,0x38,0,0);
+    keybd_event(VK_RETURN,0x1c,0,0);
+    keybd_event(VK_RETURN,0x1c,KEYEVENTF_KEYUP,0);
+    keybd_event(VK_MENU,0x38,KEYEVENTF_KEYUP,0);
+}
+
 void dataSplit(char *recordLine, listElement *thisElement){
 
         char *token;
@@ -27,5 +38,9 @@ void dataSplit(char *recordLine, listElement *thisElement){
 }
 
 void printRecord(listElement *thisElement){
+#if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
+    SetConsoleCP(1250);
+    SetConsoleOutputCP(1250);
+#endif
     printf("|%-50s|\t|%-50s|\t|%-50s|\t|%-4d|\n",thisElement->author,thisElement->title,thisElement->genre,thisElement->year);
 }

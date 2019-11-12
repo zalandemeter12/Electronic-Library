@@ -28,5 +28,4 @@ typedef enum searchCondition{
     author, title, genre, year
 } searchCondition;
 
-
 #endif //NAGYHAZI_DEFINITIONS_H
