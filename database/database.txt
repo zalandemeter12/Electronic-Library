@@ -1,31 +1,31 @@
 30
-J. K. Rowling|Harry Potter és a bölcsek köve|fantasy, thriller, regény|1997
-J. K. Rowling|Harry Potter és a titkok kamrája|fantasy, thriller, regény|1998
-J. K. Rowling|Harry Potter és az azkabani fogoly|fantasy, thriller, regény|1999
-J. K. Rowling|Harry Potter és a tuz serlege|fantasy, thriller, regény|2000
-J. K. Rowling|Harry Potter és a fonix rendje|fantasy, thriller, regény|2003
-J. K. Rowling|Harry Potter és a félvér herceg|fantasy, thriller, regény|2005
-J. K. Rowling|Harry Potter és a halál ereklyéi|fantasy, thriller, regény|2007
-Christopher Paolini|Eragon|fantasy, regény|2003
-Christopher Paolini|Elsoszülött|fantasy, regény|2005
-Christopher Paolini|Brisingr|fantasy, regény|2008
-Christopher Paolini|Örökség|fantasy, regény|2011
-George Orwell|1984|sci-fi, disztópikus regény|1949
-Joseph Heller|A 22-es csapdája|háborús regény, szatíra|1961
-Dan Brown|A Da Vinci-kód|krimi|2003
-Rudyard Kipling|A dzsungel könyve|regény|1894
-J. R. R. Tolkien|A Gyuru Szövetsége|fantasy regény|1954
-J. R. R. Tolkien|A két torony|fantasy regény|1954
-J. R. R. Tolkien|A király visszatér|fantasy regény|1955
-Alexandre Dumas|A három testor|heroikus románc, regény|1844
-Antoine de Saint-Exupéry|A kis herceg|gyermekregény|1943
-William Golding|A legyek ura|regény|1954
-Victor Hugo|A nyomorultak|regény|1862
-Umberto Eco|A rózsa neve|regény|1980
-Paulo Coelho|Az alkimista|regény|1988
-Jane Austen|Büszkeség és balítélet|regény|1813
-Charlotte Brontë|Jane Eyre|regény|1847
-Alexandre Dumas|Monte Cristo grófja|kalandregény, történelmi regény|1844
-Agatha Christie|Tíz kicsi néger|krimi|1939
-J. D. Salinger|Zabhegyezo|irodalmi realizmus|1951
-Daniel Keyes|Virágot Algernonnak|novella|1959
+J. K. Rowling|Harry Potter Ã©s a bÃ¶lcsek kÃ¶ve|fantasy|1997
+J. K. Rowling|Harry Potter Ã©s a titkok kamrÃ¡ja|fantasy|1998
+J. K. Rowling|Harry Potter Ã©s az azkabani fogoly|fantasy|1999
+J. K. Rowling|Harry Potter Ã©s a tÅ±z serlege|fantasy|2000
+J. K. Rowling|Harry Potter Ã©s a fÅ‘nix rendje|fantasy|2003
+J. K. Rowling|Harry Potter Ã©s a fÃ©lvÃ©r herceg|fantasy|2005
+J. K. Rowling|Harry Potter Ã©s a halÃ¡l ereklyÃ©i|fantasy|2007
+Christopher Paolini|Eragon|fantasy|2003
+Christopher Paolini|ElsÅ‘szÃ¼lÃ¶tt|fantasy|2005
+Christopher Paolini|Brisingr|fantasy|2008
+Christopher Paolini|Ã–rÃ¶ksÃ©g|fantasy|2011
+George Orwell|1984|sci-fi|1949
+Joseph Heller|A 22-es csapdÃ¡ja|szatÃ­ra|1961
+Dan Brown|A Da Vinci-kÃ³d|krimi|2003
+Rudyard Kipling|A dzsungel kÃ¶nyve|regÃ©ny|1894
+J. R. R. Tolkien|A GyÅ±rÅ± SzÃ¶vetsÃ©ge|fantasy|1954
+J. R. R. Tolkien|A kÃ©t torony|fantasy|1954
+J. R. R. Tolkien|A kirÃ¡ly visszatÃ©r|fantasy|1955
+Alexandre Dumas|A hÃ¡rom testÅ‘r|regÃ©ny|1844
+Antoine de Saint-ExupÃ©ry|A kis herceg|regÃ©ny|1943
+William Golding|A legyek ura|regÃ©ny|1954
+Victor Hugo|A nyomorultak|regÃ©ny|1862
+Umberto Eco|A rÃ³zsa neve|regÃ©ny|1980
+Paulo Coelho|Az alkimista|regÃ©ny|1988
+Jane Austen|BÃ¼szkesÃ©g Ã©s balÃ­tÃ©let|regÃ©ny|1813
+Charlotte BrontÃ«|Jane Eyre|regÃ©ny|1847
+Alexandre Dumas|Monte Cristo grÃ³fja|regÃ©ny|1844
+Agatha Christie|TÃ­z kicsi nÃ©ger|krimi|1939
+J. D. Salinger|ZabhegyezÅ‘|regÃ©ny|1951
+Daniel Keyes|VirÃ¡got Algernonnak|novella|1959

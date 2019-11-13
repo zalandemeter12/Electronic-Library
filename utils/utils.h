@@ -3,10 +3,10 @@
 
 #include "../definitions.h"
 
-/* Az alkalmazást megjelenítő konzolt teljesképernyős módban nyitja meg. */
-/* A függvény forráskódját innen emeltem át:
- * https://cboard.cprogramming.com/windows-programming/72624-how-get-your-program-run-fullscreen-console.html */
-void fullscreen();
+void printBox(int x, int y, int w, int h, int color);
+
+void printBanner();
+void printHeader(char *info);
 
 /* Egy paraméterként átvett karaktertömböt feldarabol 4 adattípusra (szerző, cím, műfaj, kiadási év).
  * A karaktertömb formátuma [    szerző|cím|műfaj|kiadási_év     ]

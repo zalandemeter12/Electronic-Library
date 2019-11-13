@@ -12,11 +12,11 @@ bool loadDatabase(list recordList){
 
         if (recordNumber != 0){
             /* Eldobja az első sort. */
-            char line[50+50+50+4+3+1]; fgets(line,158,fp);
+            char line[30+50+30+4+3+1]; fgets(line,118,fp);
 
             /* Beolvassa a fájl rekordokat tartalmazó sorait*/
             for (int recordIndex = 0; recordIndex < recordNumber; recordIndex++) {
-                fgets(line, 158, fp);
+                fgets(line, 118, fp);
 
                 /* Létrehoz egy új listaelemet */
                 listElement *tempElement = newElement();

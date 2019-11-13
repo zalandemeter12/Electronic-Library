@@ -7,30 +7,22 @@
 
 #include "debugmalloc/debugmalloc.h"
 
-#if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
-    #include <windows.h>
-#endif
-
-
 int main() {
-#if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
-    fullscreen();
-    SetConsoleCP(65001);
-    SetConsoleOutputCP(65001);
-#endif
-    econio_textbackground(4);
-    econio_textcolor(15);
-    econio_textbackground(4);
-    econio_textcolor(15);
     econio_set_title("Elektronikus Könyvtár");
+    econio_clrscr();
 
     /* Létrehoz egy listát és betölti a "database.txt" fájlban tárolt adatokat. */
     list recordList = createList();
     loadDatabase(recordList);
 
-    menu();
+    mainMenu();
 
     /* Törli a program által használt listát és felszabadítja az általa foglalt memóriaterületeket. */
     removeList(recordList);
+
+    econio_textbackground(16);
+    econio_textcolor(16);
+    econio_clrscr();
+    econio_gotoxy(0,0);
     return 0;
 }

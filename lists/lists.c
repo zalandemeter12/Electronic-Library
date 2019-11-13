@@ -44,9 +44,9 @@ listElement *newElement(){
     listElement *newElement  = (struct listElement*) malloc(sizeof(struct listElement));
     if (newElement == NULL) return NULL;
     /* Memóriát foglal a könyv adatait tartalmazó karaktertömbök számára. */
-    char* author =(char*) malloc(51 * sizeof(char));
+    char* author =(char*) malloc(31 * sizeof(char));
     char* title =(char*) malloc(51 * sizeof(char));
-    char* genre =(char*) malloc(51 * sizeof(char));
+    char* genre =(char*) malloc(31 * sizeof(char));
 
     /* Az így kapott pointereket elmenti a struktúrába. */
     newElement->author = author;

@@ -1,16 +1,46 @@
 #include "utils.h"
 
 #include "../debugmalloc/debugmalloc.h"
+#include "../econico/econio.h"
 
-#if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
-    #include <windows.h>
-#endif
+void printBox(int x, int y, int w, int h, int color){
+    econio_textbackground(color);
+    econio_textcolor(color);
+    for (int i = 0; i < h ; ++i) {
+        for (int j = 0; j < w; ++j) {
+            econio_gotoxy(x+j,y+i); printf("█");
+        }
+    }
+    econio_flush();
+    econio_textbackground(16);
+    econio_textcolor(16);
+    econio_gotoxy(0,0);
+}
 
-void fullscreen(){
-    keybd_event(VK_MENU,0x38,0,0);
-    keybd_event(VK_RETURN,0x1c,0,0);
-    keybd_event(VK_RETURN,0x1c,KEYEVENTF_KEYUP,0);
-    keybd_event(VK_MENU,0x38,KEYEVENTF_KEYUP,0);
+void printBanner(){
+    econio_textbackground(0);
+    econio_clrscr();
+    econio_textbackground(  1);
+    econio_textcolor(7);
+    econio_gotoxy(0,0); printf("▒░░░░░░░░░░▒░░░░░░░░░░▒                                                                                   ▒▒▒▒▒▒▒▒▒▒░▒▒▒▒▒▒▒▒▒▒░▒▒▒▒▒▒▒▒▒▒");
+    econio_gotoxy(0,1); printf("▒▒░░░░░░░░░▒▒░░░░░░░░░▒▒               ▒█▀▀▀ █░░ █▀▀ █░█ ▀▀█▀▀ █▀▀█ █▀▀█ █▀▀▄ ░▀░ █░█ █░░█ █▀▀             ▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒");
+    econio_gotoxy(0,2); printf("▒▒▒░░░░░░░░▒▒▒░░░░░░░░▒▒▒              ▒█▀▀▀ █░░ █▀▀ █▀▄ ░░█░░ █▄▄▀ █░░█ █░░█ ▀█▀ █▀▄ █░░█ ▀▀█              ▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒");
+    econio_gotoxy(0,3); printf("▒▒▒▒░░░░░░░▒▒▒▒░░░░░░░▒▒▒▒             ▒█▄▄▄ ▀▀▀ ▀▀▀ ▀░▀ ░░▀░░ ▀░▀▀ ▀▀▀▀ ▀░░▀ ▀▀▀ ▀░▀ ░▀▀▀ ▀▀▀               ▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒");
+    econio_gotoxy(0,4); printf("▒▒▒▒▒░░░░░░▒▒▒▒▒░░░░░░▒▒▒▒▒                                                           ▄                       ▒▒▒▒▒▒░░░░░▒▒▒▒▒▒░░░░░▒▒▒▒▒▒");
+    econio_gotoxy(0,5); printf("▒▒▒▒▒▒░░░░░▒▒▒▒▒▒░░░░░▒▒▒▒▒▒                            ░▀░▀                        ░▀                         ▒▒▒▒▒░░░░░░▒▒▒▒▒░░░░░░▒▒▒▒▒");
+    econio_gotoxy(0,6); printf("▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒                     ▒█░▄▀ █▀▀█ █▀▀▄ █░░█ ▀█░█▀ ▀▀█▀▀ █▀▀█ █▀▀█                    ▒▒▒▒░░░░░░░▒▒▒▒░░░░░░░▒▒▒▒");
+    econio_gotoxy(0,7); printf("▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒                    ▒█▀▄░ █░░█ █░░█ █▄▄█ ░█▄█░ ░░█░░ █▄▄█ █▄▄▀                     ▒▒▒░░░░░░░░▒▒▒░░░░░░░░▒▒▒");
+    econio_gotoxy(0,8); printf("▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒                   ▒█░▒█ ▀▀▀▀ ▀░░▀ ▄▄▄█ ░░▀░░ ░░▀░░ ▀░░▀ ▀░▀▀                      ▒▒░░░░░░░░░▒▒░░░░░░░░░▒▒");
+    econio_gotoxy(0,9); printf("▒▒▒▒▒▒▒▒▒▒░▒▒▒▒▒▒▒▒▒▒░▒▒▒▒▒▒▒▒▒▒                                                                                   ▒░░░░░░░░░░▒░░░░░░░░░░▒");
+    econio_flush();
+}
+
+void printHeader(char * info){
+    printBox(0,11,138,3,7);
+    econio_textcolor(0);
+    econio_textbackground(7);
+    econio_gotoxy(0,12);printf("\t%s", info);
+    econio_flush();
 }
 
 void dataSplit(char *recordLine, listElement *thisElement){
@@ -38,9 +68,5 @@ void dataSplit(char *recordLine, listElement *thisElement){
 }
 
 void printRecord(listElement *thisElement){
-#if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
-    SetConsoleCP(1250);
-    SetConsoleOutputCP(1250);
-#endif
-    printf("|%-50s|\t|%-50s|\t|%-50s|\t|%-4d|\n",thisElement->author,thisElement->title,thisElement->genre,thisElement->year);
+    printf("%-30s\t%-50s\t%-30s\t%-4d\n",thisElement->author,thisElement->title,thisElement->genre,thisElement->year);
 }
