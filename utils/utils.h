@@ -14,6 +14,6 @@ void printHeader(char *info);
 void dataSplit(char *recordLine, listElement *thisElement);
 
 /* Kiírja egy paraméterként átvett lista elem adatait megfelelően formázva.*/
-void printRecord(listElement *thisElement);
+void printRecord(listElement *thisElement, int x, int y, int bgcolor);
 
 #endif //NAGYHAZI_UTILS_H

@@ -68,7 +68,7 @@ void printDatabase(list recordList){
     /* Végig iterál a lista összes elemén és formázva kiírja őket a kijelzőre. */
     listElement *moving = recordList.first->next;
     while (moving != recordList.last){
-        printRecord(moving);
+
         moving = moving->next;
     }
 }
