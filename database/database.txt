@@ -1,31 +1,30 @@
-30
-J. K. Rowling|Harry Potter és a bölcsek köve|fantasy|1997
-J. K. Rowling|Harry Potter és a titkok kamrája|fantasy|1998
-J. K. Rowling|Harry Potter és az azkabani fogoly|fantasy|1999
-J. K. Rowling|Harry Potter és a tűz serlege|fantasy|2000
-J. K. Rowling|Harry Potter és a főnix rendje|fantasy|2003
-J. K. Rowling|Harry Potter és a félvér herceg|fantasy|2005
-J. K. Rowling|Harry Potter és a halál ereklyéi|fantasy|2007
-Christopher Paolini|Eragon|fantasy|2003
-Christopher Paolini|Elsőszülött|fantasy|2005
-Christopher Paolini|Brisingr|fantasy|2008
-Christopher Paolini|Örökség|fantasy|2011
-George Orwell|1984|sci-fi|1949
-Joseph Heller|A 22-es csapdája|szatíra|1961
-Dan Brown|A Da Vinci-kód|krimi|2003
-Rudyard Kipling|A dzsungel könyve|regény|1894
-J. R. R. Tolkien|A Gyűrű Szövetsége|fantasy|1954
-J. R. R. Tolkien|A két torony|fantasy|1954
-J. R. R. Tolkien|A király visszatér|fantasy|1955
-Alexandre Dumas|A három testőr|regény|1844
-Antoine de Saint-Exupéry|A kis herceg|regény|1943
-William Golding|A legyek ura|regény|1954
-Victor Hugo|A nyomorultak|regény|1862
-Umberto Eco|A rózsa neve|regény|1980
-Paulo Coelho|Az alkimista|regény|1988
-Jane Austen|Büszkeség és balítélet|regény|1813
-Charlotte Brontë|Jane Eyre|regény|1847
-Alexandre Dumas|Monte Cristo grófja|regény|1844
-Agatha Christie|Tíz kicsi néger|krimi|1939
-J. D. Salinger|Zabhegyező|regény|1951
 Daniel Keyes|Virágot Algernonnak|novella|1959
+J. D. Salinger|Zabhegyező|regény|1951
+Agatha Christie|Tíz kicsi néger|krimi|1939
+Alexandre Dumas|Monte Cristo grófja|regény|1844
+Charlotte Brontë|Jane Eyre|regény|1847
+Jane Austen|Büszkeség és balítélet|regény|1813
+Paulo Coelho|Az alkimista|regény|1988
+Umberto Eco|A rózsa neve|regény|1980
+Victor Hugo|A nyomorultak|regény|1862
+William Golding|A legyek ura|regény|1954
+Antoine de Saint-Exupéry|A kis herceg|regény|1943
+Alexandre Dumas|A három testőr|regény|1844
+J. R. R. Tolkien|A király visszatér|fantasy|1955
+J. R. R. Tolkien|A két torony|fantasy|1954
+J. R. R. Tolkien|A Gyűrű Szövetsége|fantasy|1954
+Rudyard Kipling|A dzsungel könyve|regény|1894
+Dan Brown|A Da Vinci-kód|krimi|2003
+Joseph Heller|A 22-es csapdája|szatíra|1961
+George Orwell|1984|sci-fi|1949
+Christopher Paolini|Örökség|fantasy|2011
+Christopher Paolini|Brisingr|fantasy|2008
+Christopher Paolini|Elsőszülött|fantasy|2005
+Christopher Paolini|Eragon|fantasy|2003
+J. K. Rowling|Harry Potter és a halál ereklyéi|fantasy|2007
+J. K. Rowling|Harry Potter és a félvér herceg|fantasy|2005
+J. K. Rowling|Harry Potter és a főnix rendje|fantasy|2003
+J. K. Rowling|Harry Potter és a tűz serlege|fantasy|2000
+J. K. Rowling|Harry Potter és az azkabani fogoly|fantasy|1999
+J. K. Rowling|Harry Potter és a titkok kamrája|fantasy|1998
+J. K. Rowling|Harry Potter és a bölcsek köve|fantasy|1997

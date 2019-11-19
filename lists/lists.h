@@ -14,10 +14,6 @@ void removeList(list thisList);
  * memóriaterületeket és visszatér az új elemre mutató pointerrel. */
 listElement *newElement();
 
-/* Felszabadítja a paraméterként kapott listaelem által foglalt
- * memóriaterületeket.*/
-void freeElement(listElement *thisElement);
-
 /* A paraméterként kapott listaelemet hozzáfűzi a szintén
  * paraméterként kapott lista elejéhez. */
 void appendElementFirst(list thisList, listElement *thisElement);

@@ -1,8 +1,11 @@
 #include "menus.h"
-#include "../econico/econio.h"
+#include "../econio/econio.h"
 #include "../utils/utils.h"
+#include "../records/records.h"
+#include "../database/database.h"
 
 #include "../debugmalloc/debugmalloc.h"
+
 
 void printMenu (char **menuElements, int elementNumber, int selectedIndex, int x, int y){
     for (int index = 0; index < elementNumber; index++) {
@@ -22,14 +25,15 @@ void printMenu (char **menuElements, int elementNumber, int selectedIndex, int x
     econio_gotoxy(0,0);
 }
 
-void mainMenu(int selected){
-    printHeader("Menüpont kiválasztása: ↑ ↓ \tMenüpont megnyitása: ENTER");
+void mainMenu(list recordList, int selected){
+    printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER");
 
     char *menuElements[] = {" Rekord menü    ", " Adatbázis menü ", " Kilépés        "};
     printMenu(menuElements, 3, selected, 8, 17);
 
-    int key; int index = selected;
-    while ((key = econio_getch()) != 10){
+    int key; int index = selected; bool quit = false;
+    while (!quit){
+        key = econio_getch();
         switch (key) {
             case -21:
                 if (index != 2) index++;
@@ -39,28 +43,33 @@ void mainMenu(int selected){
                 if (index != 0) index--;
                 printMenu(menuElements, 3, index, 8, 17);
                 break;
+            case 10:
+                switch (index) {
+                    case 0:
+                        recordMenu(recordList,0);
+                        break;
+                    case 1:
+                        databaseMenu(recordList,0);
+                        break;
+                    case 2:
+                        quit = true;
+                        break;
+                }
+                break;
         }
     }
-    switch (index) {
-        case 0:
-            recordMenu(0);
-            break;
-        case 1:
-            databaseMenu(0);
-            break;
-        case 2:
-            break;
-    }
+
 }
 
-void recordMenu(int selected){
+void recordMenu(list recordList, int selected){
     printHeader("Menüpont kiválasztása: ↑ ↓ \tMenüpont megnyitása: ENTER");
 
     char *menuElements[] = {" Hozzáadás ", " Törlés    ", " Módosítás ", " Vissza    "};
     printMenu(menuElements, 4, selected, 32, 17);
 
-    int key; int index = selected;
-    while ((key = econio_getch()) != 10){
+    int key; int index = selected; bool quit = false;
+    while (!quit){
+        key = econio_getch();
         switch (key) {
             case -21:
                 if (index != 3) index++;
@@ -70,30 +79,34 @@ void recordMenu(int selected){
                 if (index != 0) index--;
                 printMenu(menuElements, 4, index, 32, 17);
                 break;
+            case 10:
+                switch (index) {
+                    case 0:
+                        addRecord(recordList);
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        printBox(32,17,11,4,8);
+                        quit = true;
+                        break;
+                }
+                break;
         }
-    }
-    switch (index) {
-        case 0:
-            break;
-        case 1:
-            break;
-        case 2:
-            break;
-        case 3:
-            printBox(32,17,11,4,8);
-            mainMenu(0);
-            break;
     }
 }
 
-void databaseMenu(int selected){
+void databaseMenu(list recordList, int selected){
     printHeader("Menüpont kiválasztása: ↑ ↓ \tMenüpont megnyitása: ENTER");
 
     char *menuElements[] = {" Keresés    ", " Kilistázás ", " Mentés     ", " Vissza     "};
     printMenu(menuElements, 4, selected, 32, 17);
 
-    int key; int index = selected;
-    while ((key = econio_getch()) != 10){
+    int key; int index = selected; bool quit = false;
+    while (!quit){
+        key = econio_getch();
         switch (key) {
             case -21:
                 if (index != 3) index++;
@@ -103,31 +116,37 @@ void databaseMenu(int selected){
                 if (index != 0) index--;
                 printMenu(menuElements, 4, index, 32, 17);
                 break;
+            case 10:
+                switch (index) {
+                    case 0:
+                        searchMenu(recordList,0);
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        saveDatabase(recordList);
+                        printBox(32,17,12,4,8);
+                        quit = true;
+                        break;
+                    case 3:
+                        printBox(32,17,12,4,8);
+                        quit = true;
+                        break;
+                }
+                break;
         }
-    }
-    switch (index) {
-        case 0:
-            searchMenu(0);
-            break;
-        case 1:
-            break;
-        case 2:
-            break;
-        case 3:
-            printBox(32,17,12,4,8);
-            mainMenu(1);
-            break;
     }
 }
 
-void searchMenu(int selected){
+void searchMenu(list recordList, int selected){
     printHeader("Menüpont kiválasztása: ↑ ↓ \tMenüpont megnyitása: ENTER");
 
     char *menuElements[] = {" Szerző alapján     ", " Cím alapján        ", " Műfaj alapján      ", " Kiadási év alapján ", " Vissza             "};
     printMenu(menuElements, 5, selected, 52, 17);
 
-    int key; int index = selected;
-    while ((key = econio_getch()) != 10){
+    int key; int index = selected; bool quit = false;
+    while (!quit){
+        key = econio_getch();
         switch (key) {
             case -21:
                 if (index != 4) index++;
@@ -137,20 +156,23 @@ void searchMenu(int selected){
                 if (index != 0) index--;
                 printMenu(menuElements, 5, index, 52, 17);
                 break;
+            case 10:
+                switch (index) {
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        printBox(52,17,20,5,8);
+                        quit = true;
+                        break;
+                }
+                break;
         }
     }
-    switch (index) {
-        case 0:
-            break;
-        case 1:
-            break;
-        case 2:
-            break;
-        case 3:
-            break;
-        case 4:
-            printBox(52,17,20,5,8);
-            databaseMenu(0);
-            break;
-    }
+
 }
