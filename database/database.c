@@ -1,7 +1,10 @@
 #include "database.h"
 #include "../lists/lists.h"
+#include "../econio/econio.h"
+#include "../utils/utils.h"
 
 #include "../debugmalloc/debugmalloc.h"
+
 
 bool loadDatabase(list recordList) {
     FILE *fp;
@@ -14,7 +17,7 @@ bool loadDatabase(list recordList) {
     }
 
     /* Beolvassa a fájl sorait lokális változókba, majd ezeket elmenti
-     * a létrehozott listaelembe és hozzáfűzi a lista elejéhez. */
+     * a létrehozott listaelembe és hozzáfűzi a lista végéhez. */
     char author[31]; char title[51]; char genre[31]; int year;
     while (fscanf(fp," %[^|]|%[^|]|%[^|]|%d",author,title,genre,&year) != EOF) {
         listElement *tempElement = newElement();
@@ -22,7 +25,7 @@ bool loadDatabase(list recordList) {
         strcpy(tempElement->title, title);
         strcpy(tempElement->genre, genre);
         tempElement->year = year;
-        appendElementFirst(recordList, tempElement);
+        appendElementLast(recordList, tempElement);
     }
 
     fclose(fp);
@@ -51,10 +54,29 @@ bool saveDatabase(list recordList){
 }
 
 void printDatabase(list recordList){
-    /* Végig iterál a lista összes elemén és formázva kiírja őket a kijelzőre. */
-    listElement *moving = recordList.first->next;
-    while (moving != recordList.last){
+    int key; int index = 0; int elementIndex = 0; int counter = 0; bool quit = false; listElement * moving;
+    while (!quit){
+        key = econio_getch();
+        switch (key) {
+            case -21:
+                if (index != 10) {
 
-        moving = moving->next;
+                } else {
+
+                }
+                break;
+            case -20:
+                if (index != 0) {
+
+                } else {
+
+                }
+                break;
+            case 10:
+                break;
+            case 27:
+                quit = true;
+                break;
+        }
     }
 }

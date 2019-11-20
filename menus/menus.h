@@ -6,9 +6,9 @@
 
 void printMenu (char **menuElements, int elementNumber, int selectedIndex, int x, int y);
 
-void mainMenu(list recordList, int selected);
-void recordMenu(list recordList, int selected);
-void databaseMenu(list recordList, int selected);
-void searchMenu(list recordList, int selected);
+void mainMenu(list recordList);
+void recordMenu(list recordList);
+void databaseMenu(list recordList);
+void searchMenu(list recordList);
 
 #endif //NAGYHAZI_MENUS_H

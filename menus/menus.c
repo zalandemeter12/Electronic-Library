@@ -25,13 +25,13 @@ void printMenu (char **menuElements, int elementNumber, int selectedIndex, int x
     econio_gotoxy(0,0);
 }
 
-void mainMenu(list recordList, int selected){
+void mainMenu(list recordList){
     printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER");
 
     char *menuElements[] = {" Rekord menü    ", " Adatbázis menü ", " Kilépés        "};
-    printMenu(menuElements, 3, selected, 8, 17);
+    printMenu(menuElements, 3, 0, 8, 17);
 
-    int key; int index = selected; bool quit = false;
+    int key; int index = 0; bool quit = false;
     while (!quit){
         key = econio_getch();
         switch (key) {
@@ -46,10 +46,10 @@ void mainMenu(list recordList, int selected){
             case 10:
                 switch (index) {
                     case 0:
-                        recordMenu(recordList,0);
+                        recordMenu(recordList);
                         break;
                     case 1:
-                        databaseMenu(recordList,0);
+                        databaseMenu(recordList);
                         break;
                     case 2:
                         quit = true;
@@ -61,13 +61,13 @@ void mainMenu(list recordList, int selected){
 
 }
 
-void recordMenu(list recordList, int selected){
+void recordMenu(list recordList){
     printHeader("Menüpont kiválasztása: ↑ ↓ \tMenüpont megnyitása: ENTER");
 
     char *menuElements[] = {" Hozzáadás ", " Törlés    ", " Módosítás ", " Vissza    "};
-    printMenu(menuElements, 4, selected, 32, 17);
+    printMenu(menuElements, 4, 0, 32, 17);
 
-    int key; int index = selected; bool quit = false;
+    int key; int index = 0; bool quit = false;
     while (!quit){
         key = econio_getch();
         switch (key) {
@@ -98,13 +98,13 @@ void recordMenu(list recordList, int selected){
     }
 }
 
-void databaseMenu(list recordList, int selected){
+void databaseMenu(list recordList){
     printHeader("Menüpont kiválasztása: ↑ ↓ \tMenüpont megnyitása: ENTER");
 
     char *menuElements[] = {" Keresés    ", " Kilistázás ", " Mentés     ", " Vissza     "};
-    printMenu(menuElements, 4, selected, 32, 17);
+    printMenu(menuElements, 4, 0, 32, 17);
 
-    int key; int index = selected; bool quit = false;
+    int key; int index = 0; bool quit = false;
     while (!quit){
         key = econio_getch();
         switch (key) {
@@ -119,9 +119,10 @@ void databaseMenu(list recordList, int selected){
             case 10:
                 switch (index) {
                     case 0:
-                        searchMenu(recordList,0);
+                        searchMenu(recordList);
                         break;
                     case 1:
+                        printDatabase(recordList);
                         break;
                     case 2:
                         saveDatabase(recordList);
@@ -138,13 +139,13 @@ void databaseMenu(list recordList, int selected){
     }
 }
 
-void searchMenu(list recordList, int selected){
+void searchMenu(list recordList){
     printHeader("Menüpont kiválasztása: ↑ ↓ \tMenüpont megnyitása: ENTER");
 
     char *menuElements[] = {" Szerző alapján     ", " Cím alapján        ", " Műfaj alapján      ", " Kiadási év alapján ", " Vissza             "};
-    printMenu(menuElements, 5, selected, 52, 17);
+    printMenu(menuElements, 5, 0, 52, 17);
 
-    int key; int index = selected; bool quit = false;
+    int key; int index = 0; bool quit = false;
     while (!quit){
         key = econio_getch();
         switch (key) {

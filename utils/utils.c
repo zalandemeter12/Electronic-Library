@@ -55,7 +55,6 @@ void dataSplit(char *recordLine, listElement *thisElement){
                 if (counter == 0) strcpy(thisElement->title,token);
                 if (counter == 1) strcpy(thisElement->genre,token);
                 if (counter == 2) {
-
                     /* Átkonvertálja a kapott sztringet egy integerré. Nem kezeli az ebből adódó hibákat. */
                     int num = atoi(token);
                     thisElement->year = num;
@@ -66,6 +65,7 @@ void dataSplit(char *recordLine, listElement *thisElement){
 }
 
 void printRecord(listElement *thisElement, int x, int y, int bgcolor){
+    printBox(x,y,146,1,bgcolor);
     econio_textbackground(bgcolor);
     econio_textcolor(0);
     econio_gotoxy(x+4,y); printf("%s",thisElement->author);

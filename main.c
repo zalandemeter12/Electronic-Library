@@ -43,7 +43,7 @@ int main() {
 
 
 
-    mainMenu(recordList,0);
+    mainMenu(recordList);
 
     saveDatabase(recordList);
 
