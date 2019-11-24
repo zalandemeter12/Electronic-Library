@@ -62,7 +62,7 @@ void mainMenu(list recordList){
 }
 
 void recordMenu(list recordList){
-    printHeader("Menüpont kiválasztása: ↑ ↓ \tMenüpont megnyitása: ENTER");
+    printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER    Visszalépés: ESC");
 
     char *menuElements[] = {" Hozzáadás ", " Törlés    ", " Módosítás ", " Vissza    "};
     printMenu(menuElements, 4, 0, 32, 17);
@@ -85,8 +85,12 @@ void recordMenu(list recordList){
                         addRecord(recordList);
                         break;
                     case 1:
+                        if (recordList.first->next != recordList.last)
+                            removeRecord(recordList);
                         break;
                     case 2:
+                        if (recordList.first->next != recordList.last)
+                            modifyRecord(recordList);
                         break;
                     case 3:
                         printBox(32,17,11,4,8);
@@ -94,12 +98,17 @@ void recordMenu(list recordList){
                         break;
                 }
                 break;
+            case 27:
+                printBox(32,17,11,4,8);
+                quit = true;
+                break;
         }
     }
+    printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER");
 }
 
 void databaseMenu(list recordList){
-    printHeader("Menüpont kiválasztása: ↑ ↓ \tMenüpont megnyitása: ENTER");
+    printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER     Visszalépés: ESC");
 
     char *menuElements[] = {" Keresés    ", " Kilistázás ", " Mentés     ", " Vissza     "};
     printMenu(menuElements, 4, 0, 32, 17);
@@ -135,12 +144,17 @@ void databaseMenu(list recordList){
                         break;
                 }
                 break;
+            case 27:
+                printBox(32,17,12,4,8);
+                quit = true;
+                break;
         }
     }
+    printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER");
 }
 
 void searchMenu(list recordList){
-    printHeader("Menüpont kiválasztása: ↑ ↓ \tMenüpont megnyitása: ENTER");
+    printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER     Visszalépés: ESC");
 
     char *menuElements[] = {" Szerző alapján     ", " Cím alapján        ", " Műfaj alapján      ", " Kiadási év alapján ", " Vissza             "};
     printMenu(menuElements, 5, 0, 52, 17);
@@ -173,7 +187,10 @@ void searchMenu(list recordList){
                         break;
                 }
                 break;
+            case 27:
+                printBox(52,17,20,5,8);
+                quit = true;
+                break;
         }
     }
-
 }

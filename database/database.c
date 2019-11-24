@@ -54,27 +54,44 @@ bool saveDatabase(list recordList){
 }
 
 void printDatabase(list recordList){
-    int key; int index = 0; int elementIndex = 0; int counter = 0; bool quit = false; listElement * moving;
+    int key; int index = 0; int elementIndex = 0; bool quit = false; listElement * moving;
+    printFromTo(recordList,0,10,0,8,31);
+    printHeader("Görgetés: ↑ ↓    Visszalépés: ESC");
     while (!quit){
         key = econio_getch();
         switch (key) {
+            /* Arrow Down */
             case -21:
                 if (index != 10) {
-
+                    if (getNth(recordList,elementIndex) != recordList.last->previous){
+                        index++; elementIndex++;
+                        printFromTo(recordList,elementIndex-index,elementIndex-index+10,index,8,31);
+                    }
                 } else {
-
+                    if (getNth(recordList,elementIndex) != recordList.last->previous){
+                        elementIndex++;
+                        printFromTo(recordList,elementIndex-10,elementIndex,index,8,31);
+                    }
                 }
                 break;
+            /* Arrow Up */
             case -20:
                 if (index != 0) {
-
+                    if (elementIndex > 0){
+                        index--; elementIndex--;
+                        printFromTo(recordList,elementIndex-index,elementIndex-index+10,index,8,31);
+                    }
                 } else {
-
+                    if (elementIndex > 0){
+                        elementIndex--;
+                        printFromTo(recordList,elementIndex,elementIndex+10,index,8,31);
+                    }
                 }
                 break;
-            case 10:
-                break;
+            /* ESC */
             case 27:
+                printFromTo(recordList,0,10,-1,8,31);
+                printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER    Visszalépés: ESC");
                 quit = true;
                 break;
         }

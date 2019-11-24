@@ -1,4 +1,6 @@
 #include "lists.h"
+#include "../econio/econio.h"
+#include "../utils/utils.h"
 
 #include "../debugmalloc/debugmalloc.h"
 
@@ -56,5 +58,48 @@ void appendElementLast(list thisList, listElement * thisElement){
     thisElement->previous = thisList.last->previous;
     thisList.last->previous->next = thisElement;
     thisList.last->previous = thisElement;
+}
+
+listElement *getNth(list thisList, int index){
+    int counter = 0;
+    listElement *moving = thisList.first->next;
+    while (moving != thisList.last && counter < index){
+        moving = moving->next;
+        counter++;
+    }
+    if (moving == thisList.last) return  NULL;
+    return moving;
+}
+
+bool modifyElement(listElement *thisElement){
+    printHeader("Add meg az adatokat: Szerző|Cím|Műfaj|Kidási_év formában!    Visszalépéshez hagyd üresen és nyomj ENTER-t.");
+    if (thisElement == NULL) {
+        return false;
+    }
+    char recordLine[118];
+    /* Bekéri a hozzáadni kívánt könyv adatait. */
+    char author[31]; char title[51]; char genre[31]; int year;
+
+    econio_normalmode();
+    econio_textbackground(8), econio_textcolor(7);
+    econio_gotoxy(8,47); printf("$  ");
+    econio_gotoxy(10,47);
+
+    if (scanf("%[^\n]",recordLine) == 1 && strcmp(recordLine,"\n") != 0){
+        sscanf(recordLine,"%[^|]|%[^|]|%[^|]|%d",author,title,genre,&year);
+        strcpy(thisElement->author, author);
+        strcpy(thisElement->title,title);
+        strcpy(thisElement->genre,genre);
+        thisElement->year = year;
+    }
+    return true;
+}
+
+bool removeElement(listElement *thisElement){
+    if (thisElement == NULL) return false;
+    thisElement->previous->next = thisElement->next;
+    thisElement->next->previous = thisElement->previous;
+    free(thisElement);
+    return true;
 }
 

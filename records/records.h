@@ -6,13 +6,13 @@
 /* Bekéri a felhasználótól egy könyv adatait, majd hozzáfűzi az így
  * létrehozott listaelemet a paraméterként kapott lista végéhez.
  * Igaz értékkel tér vissza ha a művelet sikeres, különben hamissal.*/
-bool addRecord(list thisList);
+bool addRecord(list recordList);
 
 /* */
-bool modifyRecord(listElement *thisElement);
+bool modifyRecord(list recordList);
 
 /* */
-bool removeRecord(listElement *thisElement);
+bool removeRecord(list recordList);
 
 
 #endif //NAGYHAZI_RECORDS_H

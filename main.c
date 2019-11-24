@@ -29,15 +29,7 @@ int main() {
     econio_gotoxy(8+100,28); printf("Műfaj");
     econio_gotoxy(8+138,28); printf("Év");
 
-    printBox(8,30,146,13,7);
-    listElement *moving = recordList.first->next;
-    int c = 0;
-    while (moving != recordList.last && c<11){
-        if (c%2 == 0) printRecord(moving,8,31+c,7);
-        else printRecord(moving,8,31+c,7);
-        moving = moving->next;
-        c++;
-    }
+    printFromTo(recordList,0,10,-1,8,31);
 
     /* SHELL */ printBox(0,46,162,3,8);
 
@@ -45,13 +37,12 @@ int main() {
 
     mainMenu(recordList);
 
-    saveDatabase(recordList);
-
     /* Törli a program által használt listát és felszabadítja az általa foglalt memóriaterületeket. */
     removeList(recordList);
 
     econio_textbackground(16);
     econio_textcolor(16);
+    econio_normalmode();
     econio_clrscr();
     econio_gotoxy(0,0);
     return 0;

@@ -23,4 +23,10 @@ void appendElementFirst(list thisList, listElement *thisElement);
 void appendElementLast(list thisList, listElement *thisElement);
 
 
+listElement *getNth(list thisList, int index);
+
+bool modifyElement(listElement *thisElement);
+
+bool removeElement(listElement *thisElement);
+
 #endif //NAGYHAZI_LISTS_H
