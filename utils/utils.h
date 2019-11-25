@@ -26,4 +26,6 @@ void printRecord(listElement *thisElement, int x, int y, int bgcolor);
 
 void printFromTo(list thisList, int from, int to, int selected, int x, int y);
 
+bool confirmAction(listElement *thisElement);
+
 #endif //NAGYHAZI_UTILS_H

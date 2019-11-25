@@ -27,8 +27,6 @@ void econioInit(){
     econio_gotoxy(8+100,28); printf("Műfaj");
     econio_gotoxy(8+138,28); printf("Év");
 
-    printBox(80,17,74,5,7);
-
     /* COMMAND LINE */ printBox(0,46,162,3,8);
 }
 
@@ -67,7 +65,6 @@ void printBanner(){
     econio_gotoxy(0,7); printf("▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒                                ▒█▀▄░ █░░█ █░░█ █▄▄█ ░█▄█░ ░░█░░ █▄▄█ █▄▄▀                                 ▒▒▒░░░░░░░░▒▒▒░░░░░░░░▒▒▒");
     econio_gotoxy(0,8); printf("▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒                               ▒█░▒█ ▀▀▀▀ ▀░░▀ ▄▄▄█ ░░▀░░ ░░▀░░ ▀░░▀ ▀░▀▀                                  ▒▒░░░░░░░░░▒▒░░░░░░░░░▒▒");
     econio_gotoxy(0,9); printf("▒▒▒▒▒▒▒▒▒▒░▒▒▒▒▒▒▒▒▒▒░▒▒▒▒▒▒▒▒▒▒                                                                                                           ▒░░░░░░░░░░▒░░░░░░░░░░▒");
-    econio_flush();
 }
 
 void printHeader(char * info){
@@ -75,7 +72,6 @@ void printHeader(char * info){
     econio_textcolor(0);
     econio_textbackground(7);
     econio_gotoxy(0,12);printf("\t%s", info);
-    econio_flush();
 }
 
 void dataSplit(char *recordLine, listElement *thisElement){
@@ -125,5 +121,26 @@ void printFromTo(list thisList, int from, int to, int selected, int x, int y) {
         moving = moving->next;
         counter++;
     }
-    econio_flush();
+}
+
+bool confirmAction(listElement *thisElement){
+    printBox(0,47,146,1,8);
+    econio_textbackground(8);
+    econio_textcolor(7);
+    econio_gotoxy(8+4,47); printf("%s",thisElement->author);
+    econio_gotoxy(8+42,47); printf("%s",thisElement->title);
+    econio_gotoxy(8+100,47); printf("%s",thisElement->genre);
+    econio_gotoxy(8+138,47); printf("%d",thisElement->year);
+    printHeader("Jóváhagyás: ENTER    Mégsem: ESC");
+
+    econio_rawmode();
+    econio_kbhit();
+    int key; int index = 0; bool quit = false;
+    while (!quit){
+        key = econio_getch();
+        switch (key) {
+            case 10: return true;
+            case 27: return false;
+        }
+    }
 }

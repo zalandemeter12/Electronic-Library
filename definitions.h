@@ -6,8 +6,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-/* Duplán láncolt lista elemet definiál, ami tartalmazza egy könyv
- * adatait (szerző, cím, műfaj, kiadási év). */
+/* Duplán láncolt lista elemet definiál, ami tartalmazza egy könyv adatait (szerző, cím, műfaj, kiadási év). */
 typedef struct listElement {
     char author[31];
     char title[51];
@@ -16,8 +15,7 @@ typedef struct listElement {
     struct listElement *next, *previous;
 } listElement;
 
-/* Definiál egy láncolt listát. Tartalmazza a lista első és utolsó
- * elemnére mutató pointert, és a lista elemszámára mutató pointert.*/
+/* Definiál egy láncolt listát. Tartalmazza a lista első és utolsó elemnére mutató pointert. */
 typedef struct list {
     listElement *first, *last;
 } list;

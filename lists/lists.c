@@ -38,19 +38,25 @@ void removeList(list thisList){
 }
 
 listElement *newElement(){
-    /* Memóriát foglal a listaelemet tartalmazó struktúrának. */
     listElement *newElement  = (struct listElement*) malloc(sizeof(struct listElement));
-    if (newElement == NULL) return NULL;
+    if (newElement == NULL) perror("Error: ");
     return newElement;
 }
 
 listElement *copyElement(listElement *sourceElement){
+    if (sourceElement == NULL) return NULL;
     listElement *newElement  = (struct listElement*) malloc(sizeof(struct listElement));
-    if (newElement == NULL) return NULL;
+    if (newElement == NULL){
+        perror("Error: ");
+        return NULL;
+    }
+
+    /* Átmásolja a paraméterként kapott listaelem adatait a létrehozott listaelembe. */
     stpcpy(newElement->author,sourceElement->author);
     stpcpy(newElement->title,sourceElement->title);
     stpcpy(newElement->genre,sourceElement->genre);
     newElement->year = sourceElement->year;
+
     return newElement;
 }
 
@@ -82,29 +88,50 @@ listElement *getNth(list thisList, int index){
 }
 
 bool modifyElement(listElement *thisElement){
-    printHeader("Add meg az adatokat: Szerző|Cím|Műfaj|Kidási_év formában!    Visszalépéshez hagyd üresen és nyomj ENTER-t.");
     if (thisElement == NULL) {
         return false;
     }
-    char recordLine[118];
-    /* Bekéri a hozzáadni kívánt könyv adatait. */
-    char author[31]; char title[51]; char genre[31]; int year;
 
+    char recordLine[118];
+    char author[31];
+    char title[51];
+    char genre[31];
+    int year;
+
+    printHeader("Add meg az adatokat: Szerző|Cím|Műfaj|Kidási_év formában!    Visszalépéshez hagyd üresen és nyomj ENTER-t.");
     econio_normalmode();
     econio_textbackground(8), econio_textcolor(7);
     econio_gotoxy(8,47); printf("$  ");
     econio_gotoxy(10,47);
 
+    /* Bekéri a módosítani kívánt könyv adatait. */
     if (scanf("%[^\n]",recordLine) == 1 && strcmp(recordLine,"\n") != 0){
         sscanf(recordLine,"%[^|]|%[^|]|%[^|]|%d",author,title,genre,&year);
-        strcpy(thisElement->author, author);
-        strcpy(thisElement->title,title);
-        strcpy(thisElement->genre,genre);
-        thisElement->year = year;
+
+        /* Létrehoz egy ideiglenes listaelemet a módosítás jóváhagyásának ellenőrzésére. */
+        listElement *confirmElement = newElement();
+        strcpy(confirmElement->author,author);
+        strcpy(confirmElement->title,title);
+        strcpy(confirmElement->genre,genre);
+
+        /* Ellenőrzi a jóváhagyást. */
+        confirmElement->year = year;
+
+        if (confirmAction(confirmElement)){
+            /* Végrehajtja a módosítást, átmásolja a beolvasott adatokat a kijelölt listaelembe. */
+            strcpy(thisElement->author, author);
+            strcpy(thisElement->title,title);
+            strcpy(thisElement->genre,genre);
+            thisElement->year = year;
+        }
+
+        /* Felszabadítja az ellenőrzésre létrehozott listaelem által foglalt memóriaterületet. */
+        free(confirmElement);
     }
     return true;
 }
 
+/* Kifűzi a listából a paraméterként kapott listaelemet és felszabadítja az általa foglalt memóriaterületet. */
 bool removeElement(listElement *thisElement){
     if (thisElement == NULL) return false;
     thisElement->previous->next = thisElement->next;

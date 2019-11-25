@@ -18,20 +18,22 @@ bool addRecord(list recordList){
 
     if (scanf("%[^\n]",recordLine) == 1 && strcmp(recordLine,"\n") != 0){
         sscanf(recordLine,"%[^|]|%[^|]|%[^|]|%d",author,title,genre,&year);
+
         listElement *tempElement = newElement();
         if (tempElement == NULL) {
             perror("Error: ");
             printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER    Visszalépés: ESC");
             return false;
         }
-
         strcpy(tempElement->author, author);
         strcpy(tempElement->title,title);
         strcpy(tempElement->genre,genre);
         tempElement->year = year;
 
-        /* Az így kapott listaelemet hozzáfűzi a lista végéhez. */
-        appendElementLast(recordList,tempElement);
+        if (confirmAction(tempElement) == true){
+            /* Az így kapott listaelemet hozzáfűzi a lista végéhez. */
+            appendElementFirst(recordList,tempElement);
+        } else free(tempElement);
     }
 
     printFromTo(recordList,0,10,-1,8,31);
@@ -135,7 +137,7 @@ bool removeRecord(list recordList){
                 /* ENTER */
             case 10:
                 toRemove = getNth(recordList,elementIndex);
-                if (toRemove != NULL)
+                if (toRemove != NULL && confirmAction(toRemove))
                     success = removeElement(toRemove);
                 printFromTo(recordList,0,10,-1,8,31);
                 econio_rawmode();
