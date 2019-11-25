@@ -128,6 +128,7 @@ bool modifyElement(listElement *thisElement){
         /* Felszabadítja az ellenőrzésre létrehozott listaelem által foglalt memóriaterületet. */
         free(confirmElement);
     }
+    econio_rawmode();
     return true;
 }
 

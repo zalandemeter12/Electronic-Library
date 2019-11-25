@@ -83,7 +83,6 @@ bool modifyRecord(list recordList){
             case 10:
                 success = modifyElement(getNth(recordList,elementIndex));
                 printFromTo(recordList,0,10,-1,8,31);
-                econio_rawmode();
                 printBox(0,46,162,3,8);
                 quit = true;
                 break;

@@ -11,23 +11,23 @@ void econioInit(){
     econio_kbhit();
 
     printBanner();
-    /* MENU */
+    /* MENÜ */
     printBox(0,15,162,9,8);
 
-    /* RECORD BOX */
+    /* REKORD DOBOZ */
     printBox(0,25,162,20,8);
 
-    /* RECORD HEADER*/
+    /* REKORD HEADER*/
     printBox(8,27,146,13,15);
 
-    /* RECORD HEADINGS*/
+    /* REKORD HEADING*/
     econio_textcolor(0); econio_textbackground(15);
     econio_gotoxy(8+4,28); printf("Szerző");
     econio_gotoxy(8+42,28); printf("Cím");
     econio_gotoxy(8+100,28); printf("Műfaj");
     econio_gotoxy(8+138,28); printf("Év");
 
-    /* COMMAND LINE */ printBox(0,46,162,3,8);
+    /* INPUT SOR */ printBox(0,46,162,3,8);
 }
 
 void econioExit(){
@@ -74,29 +74,6 @@ void printHeader(char * info){
     econio_gotoxy(0,12);printf("\t%s", info);
 }
 
-void dataSplit(char *recordLine, listElement *thisElement){
-
-    char *token;
-    /* Kicseréli a sor vége karaktert sztring lezáró nullára. */
-    if((token = strchr(recordLine, '\n')) != NULL) *token = '\0';
-
-    /* Felbontja a rekordsort 4 különféle adattípusra és beleírja a listaelembe. */
-    if((token = strtok(recordLine, "|")) != NULL){
-        strcpy(thisElement->author,token);
-        int counter = 0;
-        while((token = strtok(NULL, "|")) != NULL){
-            if (counter == 0) strcpy(thisElement->title,token);
-            if (counter == 1) strcpy(thisElement->genre,token);
-            if (counter == 2) {
-                /* Átkonvertálja a kapott sztringet egy integerré. Nem kezeli az ebből adódó hibákat. */
-                int num = atoi(token);
-                thisElement->year = num;
-            }
-            counter++;
-        }
-    }
-}
-
 void printRecord(listElement *thisElement, int x, int y, int bgcolor){
     printBox(x,y,146,1,bgcolor);
     econio_textbackground(bgcolor);
@@ -135,12 +112,13 @@ bool confirmAction(listElement *thisElement){
 
     econio_rawmode();
     econio_kbhit();
-    int key; int index = 0; bool quit = false;
-    while (!quit){
-        key = econio_getch();
+
+    while (true){
+        int key = econio_getch();
         switch (key) {
             case 10: return true;
             case 27: return false;
+            default: break;
         }
     }
 }

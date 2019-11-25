@@ -19,5 +19,8 @@ int main() {
 
     econioExit();
 
+    debugmalloc_log_file("../debugmalloc/debugmalloc-memlog.txt");
+    debugmalloc_atexit_dump();
+
     return 0;
 }
