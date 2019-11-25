@@ -11,11 +11,11 @@ bool loadDatabase(list recordList);
  * tárolt adatokat elmenti a "database.txt" fájlba */
 bool saveDatabase(list recordList);
 
+/* Kilistázza, megjeleníti a paraméterként kapott lista összes elemét.*/
+void printDatabase(list recordList);
+
 /* Keresést hajt végre egy paraméterként kapott keresési feltétel alapján
  * a szintén paraméterként kapott listában és kiírja az így talált adatokat.*/
 void searchDatabase(list recordList, searchCondition condition);
-
-/* Kilistázza, megjeleníti a paraméterként kapott lista összes elemét.*/
-void printDatabase(list recordList);
 
 #endif //NAGYHAZI_DATABASE_H

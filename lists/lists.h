@@ -14,6 +14,8 @@ void removeList(list thisList);
  * memóriaterületeket és visszatér az új elemre mutató pointerrel. */
 listElement *newElement();
 
+listElement *copyElement(listElement *sourceElement);
+
 /* A paraméterként kapott listaelemet hozzáfűzi a szintén
  * paraméterként kapott lista elejéhez. */
 void appendElementFirst(list thisList, listElement *thisElement);

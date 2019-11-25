@@ -97,3 +97,56 @@ void printDatabase(list recordList){
         }
     }
 }
+
+void searchDatabase(list recordList, searchCondition condition){
+    printHeader("Add meg a keresni kívánt kifejezést!    Visszalépéshez hagyd üresen és nyomj ENTER-t.");
+    char searchString[51]; int searchYear;
+    econio_normalmode();
+    econio_textbackground(8), econio_textcolor(7);
+    econio_gotoxy(8,47); printf("$  ");
+    econio_gotoxy(10,47); scanf("%[^\n]",searchString);
+    if (condition == year) sscanf(searchString,"%d",&searchYear);
+
+    list searchList = createList();
+    listElement *tempElement;
+
+    if (strlen(searchString) != 0){
+        econio_rawmode();
+        listElement *moving = recordList.first->next;
+        while (moving != recordList.last){
+            switch (condition) {
+                case author:
+                    if (strstr(moving->author,searchString) != NULL){
+                        tempElement = copyElement(moving);
+                        appendElementLast(searchList,tempElement);
+                    }
+                    break;
+                case title:
+                    if (strstr(moving->title,searchString) != NULL){
+                        tempElement = copyElement(moving);
+                        appendElementLast(searchList,tempElement);
+                    }
+                    break;
+                case genre:
+                    if (strstr(moving->genre,searchString) != NULL){
+                        tempElement = copyElement(moving);
+                        appendElementLast(searchList,tempElement);
+                    }
+                    break;
+                case year:
+                    if (moving->year == searchYear){
+                        tempElement = copyElement(moving);
+                        appendElementLast(searchList,tempElement);
+                    }
+                    break;
+            }
+            moving = moving->next;
+        }
+        printDatabase(searchList);
+        printFromTo(recordList,0,10,-1,8,31);
+    }
+    econio_rawmode();
+    printBox(0,46,162,3,8);
+    printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER     Visszalépés: ESC");
+    removeList(searchList);
+}

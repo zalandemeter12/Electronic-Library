@@ -44,6 +44,16 @@ listElement *newElement(){
     return newElement;
 }
 
+listElement *copyElement(listElement *sourceElement){
+    listElement *newElement  = (struct listElement*) malloc(sizeof(struct listElement));
+    if (newElement == NULL) return NULL;
+    stpcpy(newElement->author,sourceElement->author);
+    stpcpy(newElement->title,sourceElement->title);
+    stpcpy(newElement->genre,sourceElement->genre);
+    newElement->year = sourceElement->year;
+    return newElement;
+}
+
 void appendElementFirst(list thisList, listElement *thisElement){
     /* Beállítja a megfelelő elemek előző és következő pointereit. */
     thisElement->previous = thisList.first;

@@ -3,6 +3,42 @@
 
 #include "../debugmalloc/debugmalloc.h"
 
+void econioInit(){
+    econio_set_title("Elektronikus Könyvtár");
+    econio_textbackground(0);
+    econio_clrscr();
+    econio_rawmode();
+    econio_kbhit();
+
+    printBanner();
+    /* MENU */
+    printBox(0,15,162,9,8);
+
+    /* RECORD BOX */
+    printBox(0,25,162,20,8);
+
+    /* RECORD HEADER*/
+    printBox(8,27,146,13,15);
+
+    /* RECORD HEADINGS*/
+    econio_textcolor(0); econio_textbackground(15);
+    econio_gotoxy(8+4,28); printf("Szerző");
+    econio_gotoxy(8+42,28); printf("Cím");
+    econio_gotoxy(8+100,28); printf("Műfaj");
+    econio_gotoxy(8+138,28); printf("Év");
+
+    printBox(80,17,74,5,7);
+
+    /* COMMAND LINE */ printBox(0,46,162,3,8);
+}
+
+void econioExit(){
+    econio_textbackground(16);
+    econio_textcolor(16);
+    econio_normalmode();
+    econio_clrscr();
+    econio_gotoxy(0,0);
+}
 
 void printBox(int x, int y, int w, int h, int color){
     econio_textbackground(color);

@@ -3,6 +3,14 @@
 
 #include "../definitions.h"
 
+/* Létrehozza a felhasználói felület megjelenítését
+* és beállítja a megnyíló ablakot. */
+void econioInit();
+
+/* Törli a program felhasználói felületét is visszaállítja a
+* terminál alapértelmezett tulajdonságait. */
+void econioExit();
+
 void printBox(int x, int y, int w, int h, int color);
 
 void printBanner();

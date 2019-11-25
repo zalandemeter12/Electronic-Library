@@ -28,6 +28,8 @@ void printMenu (char **menuElements, int elementNumber, int selectedIndex, int x
 void mainMenu(list recordList){
     printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER");
 
+    printFromTo(recordList,0,10,-1,8,31);
+
     char *menuElements[] = {" Rekord menü    ", " Adatbázis menü ", " Kilépés        "};
     printMenu(menuElements, 3, 0, 8, 17);
 
@@ -174,12 +176,16 @@ void searchMenu(list recordList){
             case 10:
                 switch (index) {
                     case 0:
+                        searchDatabase(recordList,author);
                         break;
                     case 1:
+                        searchDatabase(recordList,title);
                         break;
                     case 2:
+                        searchDatabase(recordList,genre);
                         break;
                     case 3:
+                        searchDatabase(recordList,year);
                         break;
                     case 4:
                         printBox(52,17,20,5,8);
