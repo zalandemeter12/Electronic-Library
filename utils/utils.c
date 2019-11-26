@@ -27,7 +27,8 @@ void econioInit(){
     econio_gotoxy(8+100,28); printf("Műfaj");
     econio_gotoxy(8+138,28); printf("Év");
 
-    /* INPUT SOR */ printBox(0,46,162,3,8);
+    /* INPUT SOR */
+    printBox(0,46,162,3,8);
 }
 
 void econioExit(){
@@ -39,22 +40,17 @@ void econioExit(){
 }
 
 void printBox(int x, int y, int w, int h, int color){
-    econio_textbackground(color);
-    econio_textcolor(color);
+    econio_textbackground(color); econio_textcolor(color);
+
     for (int i = 0; i < h ; ++i) {
         for (int j = 0; j < w; ++j) {
             econio_gotoxy(x+j,y+i); printf("█");
         }
     }
-    econio_flush();
-    econio_textbackground(16);
-    econio_textcolor(16);
-    econio_gotoxy(0,0);
 }
 
 void printBanner(){
-    econio_textbackground(  1);
-    econio_textcolor(7);
+    econio_textbackground(  1); econio_textcolor(7);
     econio_gotoxy(0,0); printf("▒░░░░░░░░░░▒░░░░░░░░░░▒                                                                                                           ▒▒▒▒▒▒▒▒▒▒░▒▒▒▒▒▒▒▒▒▒░▒▒▒▒▒▒▒▒▒▒");
     econio_gotoxy(0,1); printf("▒▒░░░░░░░░░▒▒░░░░░░░░░▒▒                           ▒█▀▀▀ █░░ █▀▀ █░█ ▀▀█▀▀ █▀▀█ █▀▀█ █▀▀▄ ░▀░ █░█ █░░█ █▀▀                         ▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒");
     econio_gotoxy(0,2); printf("▒▒▒░░░░░░░░▒▒▒░░░░░░░░▒▒▒                          ▒█▀▀▀ █░░ █▀▀ █▀▄ ░░█░░ █▄▄▀ █░░█ █░░█ ▀█▀ █▀▄ █░░█ ▀▀█                          ▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒");
@@ -69,15 +65,16 @@ void printBanner(){
 
 void printHeader(char * info){
     printBox(0,11,162,3,7);
-    econio_textcolor(0);
-    econio_textbackground(7);
+    econio_textcolor(0); econio_textbackground(7);
     econio_gotoxy(0,12);printf("\t%s", info);
 }
 
 void printRecord(listElement *thisElement, int x, int y, int bgcolor){
+    /* Törli a kiírandó listaelem helyén szereplő adatokat. */
     printBox(x,y,146,1,bgcolor);
-    econio_textbackground(bgcolor);
-    econio_textcolor(0);
+    econio_textbackground(bgcolor); econio_textcolor(0);
+
+    /* Kiírja a listaelem adatait. */
     econio_gotoxy(x+4,y); printf("%s",thisElement->author);
     econio_gotoxy(x+42,y); printf("%s",thisElement->title);
     econio_gotoxy(x+100,y); printf("%s",thisElement->genre);
@@ -86,7 +83,10 @@ void printRecord(listElement *thisElement, int x, int y, int bgcolor){
 
 void printFromTo(list thisList, int from, int to, int selected, int x, int y) {
     printBox(8,30,146,13,7);
-    int counter = 0; int index = 0;
+
+    int counter = 0;
+    int index = 0;
+
     listElement *moving = thisList.first->next;
     while (moving != thisList.last && counter <= to){
         if (counter >= from && counter <= to) {
@@ -102,21 +102,25 @@ void printFromTo(list thisList, int from, int to, int selected, int x, int y) {
 
 bool confirmAction(listElement *thisElement){
     printBox(0,47,146,1,8);
-    econio_textbackground(8);
-    econio_textcolor(7);
+    printHeader("Jóváhagyás: ENTER    Mégsem: ESC");
+
+    /* Kiírja a jóváhagyni kívánt rekord adatait az input sorba. */
+    econio_textbackground(8); econio_textcolor(7);
     econio_gotoxy(8+4,47); printf("%s",thisElement->author);
     econio_gotoxy(8+42,47); printf("%s",thisElement->title);
     econio_gotoxy(8+100,47); printf("%s",thisElement->genre);
     econio_gotoxy(8+138,47); printf("%d",thisElement->year);
-    printHeader("Jóváhagyás: ENTER    Mégsem: ESC");
 
     econio_rawmode();
     econio_kbhit();
 
+    /* Vár a jóváhagyásra, vagy az elutasításra. */
     while (true){
         int key = econio_getch();
         switch (key) {
+            /* ENTER */
             case 10: return true;
+            /* ESC */
             case 27: return false;
             default: break;
         }

@@ -14,7 +14,8 @@ bool loadDatabase(list recordList);
 bool saveDatabase(list recordList);
 
 /* Kilistázza a paraméterként kapott lista összes elemét egy görgethető listában. A görgetést a fel - le nyilakkal
- * leütésével végezheti a felhasználó. Az ESC gomb megynomására a függvény visszatér. */
+ * leütésével végezheti a felhasználó. Az ESC gomb megynomására a függvény visszatér. A megjelenítésért egy ciklus felel,
+ * ami minden futásakor beolvassa a leütött billentyűt és ez alapján hívja meg a megfelelő függvényeket. */
 void printDatabase(list recordList);
 
 /* Keresést hajt végre egy paraméterként kapott keresési feltétel alapján a szintén paraméterként kapott listában és

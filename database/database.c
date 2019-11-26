@@ -72,7 +72,7 @@ void printDatabase(list recordList){
     while (!quit){
         key = econio_getch();
         switch (key) {
-            /* Lefele gomb */
+            /* LEFELE NYÍL */
             case -21:
                 /* Ha a kijelölt elem nem a megjelenített 11 elem utolsó eleme. */
                 if (index != 10) {
@@ -89,7 +89,7 @@ void printDatabase(list recordList){
                     }
                 }
                 break;
-            /* Felfele gomb */
+            /* FELFELE NYÍL */
             case -20:
                 /* Ha a kijelölt elem nem a megjelenített 11 elem első eleme. */
                 if (index != 0) {
@@ -109,13 +109,13 @@ void printDatabase(list recordList){
             /* ESC */
             case 27:
                 printFromTo(recordList,0,10,-1,8,31);
-                printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER    Visszalépés: ESC");
                 quit = true;
                 break;
             default:
                 break;
         }
     }
+    printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER    Visszalépés: ESC");
 }
 
 void searchDatabase(list recordList, searchCondition condition){
@@ -128,9 +128,6 @@ void searchDatabase(list recordList, searchCondition condition){
     econio_textbackground(8); econio_textcolor(7);
     econio_gotoxy(8,47); printf("$  ");
     econio_gotoxy(10,47); scanf("%[^\n]",searchString);
-
-    /* Ha év alapján keres a felhasználó a beolvasott sztringből egész számot olvas ki. */
-    if (condition == year) sscanf(searchString,"%d",&searchYear);
 
     list searchList = createList();
     listElement *tempElement;
@@ -163,10 +160,14 @@ void searchDatabase(list recordList, searchCondition condition){
                     }
                     break;
                 case year:
+                    /* Ha év alapján keres a felhasználó a beolvasott sztringből egész számot olvas ki. */
+                    sscanf(searchString,"%d",&searchYear);
                     if (moving->year == searchYear){
                         tempElement = copyElement(moving);
                         appendElementLast(searchList,tempElement);
                     }
+                    break;
+                default:
                     break;
             }
             moving = moving->next;

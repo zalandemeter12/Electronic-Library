@@ -3,8 +3,8 @@
 
 #include "../definitions.h"
 
-/* Létrehoz egy duplán láncolt strázsás listát és visszatér vele a lista tartalmazza a benne tárolt elemeket határoló
- * strázsákra mutató pointert. */
+/* Létrehoz egy duplán láncolt strázsás listát és visszatér vele. A lista tartalmazza a benne tárolt elemeket határoló
+ * strázsákra mutató pointereket. */
 list createList();
 
 /* Felszabadítja a paraméterként kapott lista által lefoglalt memória területeket, törli a listát. */
@@ -34,7 +34,9 @@ listElement *getNth(list thisList, int index);
  * pointer NULL pointer. */
 bool modifyElement(listElement *thisElement);
 
-/* Törli a paraméterként kapott listaelemet az adatbázisból. Ha a kapott pointer NULL pointer, hamis értékkel tér vissza.*/
+/* Kifűzi a listából a paraméterként kapott listaelemet és felszabadítja az általa foglalt memóriaterületet. Ha a kapott
+ * pointer NULL pointer, hamis értékkel tér vissza. Ha a felhasználó nem hagyja jóvá a törlést akkor is hamis értékkel
+ * tér vissza.*/
 bool removeElement(listElement *thisElement);
 
 #endif //NAGYHAZI_LISTS_H

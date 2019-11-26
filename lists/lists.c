@@ -132,11 +132,16 @@ bool modifyElement(listElement *thisElement){
     return true;
 }
 
-/* Kifűzi a listából a paraméterként kapott listaelemet és felszabadítja az általa foglalt memóriaterületet. */
+
 bool removeElement(listElement *thisElement){
+    if (!confirmAction(thisElement)) return false;
     if (thisElement == NULL) return false;
+
+    /* Kifűzi a listaelemet a listából, a pointerek megfelelő beállításával. */
     thisElement->previous->next = thisElement->next;
     thisElement->next->previous = thisElement->previous;
+
+    /* Felszabadítja az általa foglalt memóriaterületet. */
     free(thisElement);
     return true;
 }
