@@ -20,7 +20,7 @@ void printMenu (char **menuElements, int elementNumber, int selectedIndex, int x
     }
 }
 
-void mainMenu(list recordList){
+void mainMenu(list *recordList){
     int key;
     int index = 0;
     bool quit = false;
@@ -72,7 +72,7 @@ void mainMenu(list recordList){
 
 }
 
-void recordMenu(list recordList){
+void recordMenu(list *recordList){
     int key;
     int index = 0;
     bool quit = false;
@@ -108,12 +108,12 @@ void recordMenu(list recordList){
                         break;
                     case 1:
                         /* Ha nem üres a rekordokat tartalmazó lista meghívja a megfelelő függvényt. */
-                        if (recordList.first->next != recordList.last)
+                        if (recordList->first->next != recordList->last)
                             removeRecord(recordList);
                         break;
                     case 2:
                         /* Ha nem üres a rekordokat tartalmazó lista meghívja a megfelelő függvényt. */
-                        if (recordList.first->next != recordList.last)
+                        if (recordList->first->next != recordList->last)
                             modifyRecord(recordList);
                         break;
                     case 3:
@@ -137,7 +137,7 @@ void recordMenu(list recordList){
     printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER");
 }
 
-void databaseMenu(list recordList){
+void databaseMenu(list *recordList){
     int key;
     int index = 0;
     bool quit = false;
@@ -198,7 +198,7 @@ void databaseMenu(list recordList){
     printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER");
 }
 
-void searchMenu(list recordList){
+void searchMenu(list *recordList){
     int key;
     int index = 0;
     bool quit = false;

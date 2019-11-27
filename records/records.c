@@ -5,12 +5,12 @@
 
 #include "../debugmalloc/debugmalloc.h"
 
-bool addRecord(list recordList){
-    char recordLine[118];
-    char author[31];
-    char title[51];
-    char genre[31];
-    int year;
+bool addRecord(list *recordList){
+    char recordLine[118] = "<NULL>";
+    char author[31] = "<NULL>";
+    char title[51] = "<NULL>";
+    char genre[31] = "<NULL>";
+    int year = 0;
 
     printHeader("Add meg az adatokat: Szerző|Cím|Műfaj|Kidási_év formában!    Visszalépéshez hagyd üresen és nyomj ENTER-t.");
     econio_normalmode();
@@ -19,7 +19,8 @@ bool addRecord(list recordList){
     econio_gotoxy(10,47);
 
     /* Bekéri a hozzáadni kívánt könyv adatait. */
-    if (scanf("%[^\n]",recordLine) == 1 && strcmp(recordLine,"\n") != 0){
+
+    if (scanf("%[^\n]",recordLine) == 1){
         sscanf(recordLine,"%[^|]|%[^|]|%[^|]|%d",author,title,genre,&year);
 
         listElement *tempElement = newElement();
@@ -36,7 +37,7 @@ bool addRecord(list recordList){
         tempElement->year = year;
 
         /* Ellenőrzi a jóváhagyást. */
-        if (confirmAction(tempElement) == true){
+        if (confirmAction(tempElement)){
             /* Az így kapott listaelemet hozzáfűzi a lista végéhez. */
             appendElementFirst(recordList,tempElement);
         } else free(tempElement);
@@ -49,12 +50,12 @@ bool addRecord(list recordList){
     return true;
 }
 
-bool modifyRecord(list recordList){
-    bool success = false;
+bool modifyRecord(list *recordList){
     int key;
     int index = 0;
     int elementIndex = 0;
     bool quit = false;
+    bool success = false;
 
     printFromTo(recordList,0,10,0,8,31);
     printHeader("Kiválasztás: ↑ ↓    Módosítás: ENTER    Visszalépés: ESC");
@@ -67,13 +68,13 @@ bool modifyRecord(list recordList){
                 /* Ha a kijelölt elem nem a megjelenített 11 elem utolsó eleme. */
                 if (index != 10) {
                     /* Ha a kijelölt elem nem a lista utlosó eleme. */
-                    if (getNth(recordList,elementIndex) != recordList.last->previous){
+                    if (getNth(recordList,elementIndex) != recordList->last->previous){
                         index++; elementIndex++;
                         printFromTo(recordList,elementIndex-index,elementIndex-index+10,index,8,31);
                     }
                 } else {
                     /* Ha a kijelölt elem nem a lista utlosó eleme. */
-                    if (getNth(recordList,elementIndex) != recordList.last->previous){
+                    if (getNth(recordList,elementIndex) != recordList->last->previous){
                         elementIndex++;
                         printFromTo(recordList,elementIndex-10,elementIndex,index,8,31);
                     }
@@ -117,12 +118,12 @@ bool modifyRecord(list recordList){
     return success;
 }
 
-bool removeRecord(list recordList){
-    bool success = false;
+bool removeRecord(list *recordList){
     int key;
     int index = 0;
     int elementIndex = 0;
     bool quit = false;
+    bool success = false;
 
     printFromTo(recordList,0,10,0,8,31);
     printHeader("Kiválasztás: ↑ ↓    Törlés: ENTER    Visszalépés: ESC");
@@ -135,13 +136,13 @@ bool removeRecord(list recordList){
                 /* Ha a kijelölt elem nem a megjelenített 11 elem utolsó eleme. */
                 if (index != 10) {
                     /* Ha a kijelölt elem nem a lista utlosó eleme. */
-                    if (getNth(recordList,elementIndex) != recordList.last->previous){
+                    if (getNth(recordList,elementIndex) != recordList->last->previous){
                         index++; elementIndex++;
                         printFromTo(recordList,elementIndex-index,elementIndex-index+10,index,8,31);
                     }
                 } else {
                     /* Ha a kijelölt elem nem a lista utlosó eleme. */
-                    if (getNth(recordList,elementIndex) != recordList.last->previous){
+                    if (getNth(recordList,elementIndex) != recordList->last->previous){
                         elementIndex++;
                         printFromTo(recordList,elementIndex-10,elementIndex,index,8,31);
                     }

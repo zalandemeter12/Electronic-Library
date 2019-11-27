@@ -1,5 +1,5 @@
-#ifndef NAGYHAZI_DEFINITIONS_H
-#define NAGYHAZI_DEFINITIONS_H
+#ifndef DEFINITIONS_H
+#define DEFINITIONS_H
 
 #include <stdlib.h>
 #include <stdio.h>

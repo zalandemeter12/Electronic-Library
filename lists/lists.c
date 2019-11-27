@@ -4,16 +4,16 @@
 
 #include "../debugmalloc/debugmalloc.h"
 
-list createList(){
-    list newList;
+list *createList(){
+    list *newList = malloc(sizeof(struct list));
 
     /* Memóriát foglal a lista adatainak, létrehozza a listát határoló strázsákat. */
     listElement *first = (struct listElement *) malloc(sizeof(struct listElement));
     listElement *last = (struct listElement *) malloc(sizeof(struct listElement));
 
     /* Az így kapott pointereket elmenti az új lista struktúrába. */
-    newList.first = first;
-    newList.last = last;
+    newList->first = first;
+    newList->last = last;
 
     /* A strázsák következő és előző pointereit beállítja úgy,
      * hogy a strázsák egymásra mutassanak. */
@@ -22,24 +22,34 @@ list createList(){
     return newList;
 }
 
-void removeList(list thisList){
+void removeList(list *thisList){
     /* Végigmegy a lista összes nem strázsa elemén és meghívja rá a free() függvényt. */
-    listElement *moving = thisList.first->next;
+    listElement *moving = thisList->first->next;
     listElement *next;
-    while (moving != thisList.last) {
+    while (moving != thisList->last) {
         next = moving->next;
         free(moving);
         moving = next;
     }
 
     /* Felszabadítja a lista adatait tartalmazó memóriaterületeket. */
-    free(thisList.first);
-    free(thisList.last);
+    free(thisList->first);
+    free(thisList->last);
+    free(thisList);
 }
 
 listElement *newElement(){
     listElement *newElement  = (struct listElement*) malloc(sizeof(struct listElement));
     if (newElement == NULL) perror("Error: ");
+
+    else {
+        /* Inicializálja a létrehozott változó adatait. */
+        stpcpy(newElement->author,"<NULL>");
+        stpcpy(newElement->title,"<NULL>");
+        stpcpy(newElement->genre,"<NULL>");
+        newElement->year = 0;
+    }
+
     return newElement;
 }
 
@@ -60,43 +70,41 @@ listElement *copyElement(listElement *sourceElement){
     return newElement;
 }
 
-void appendElementFirst(list thisList, listElement *thisElement){
+void appendElementFirst(list *thisList, listElement *thisElement){
     /* Beállítja a megfelelő elemek előző és következő pointereit. */
-    thisElement->previous = thisList.first;
-    thisElement->next = thisList.first->next;
-    thisList.first->next->previous = thisElement;
-    thisList.first->next = thisElement;
+    thisElement->previous = thisList->first;
+    thisElement->next = thisList->first->next;
+    thisList->first->next->previous = thisElement;
+    thisList->first->next = thisElement;
 }
 
-void appendElementLast(list thisList, listElement * thisElement){
+void appendElementLast(list *thisList, listElement * thisElement){
     /* Beállítja a megfelelő elemek előző és következő pointereit. */
-    thisElement->next = thisList.last;
-    thisElement->previous = thisList.last->previous;
-    thisList.last->previous->next = thisElement;
-    thisList.last->previous = thisElement;
+    thisElement->next = thisList->last;
+    thisElement->previous = thisList->last->previous;
+    thisList->last->previous->next = thisElement;
+    thisList->last->previous = thisElement;
 }
 
-listElement *getNth(list thisList, int index){
+listElement *getNth(list *thisList, int index){
     int counter = 0;
-    listElement *moving = thisList.first->next;
-    while (moving != thisList.last && counter < index){
+    listElement *moving = thisList->first->next;
+    while (moving != thisList->last && counter < index){
         moving = moving->next;
         counter++;
     }
-    if (moving == thisList.last) return  NULL;
+    if (moving == thisList->last) return  NULL;
     return moving;
 }
 
 bool modifyElement(listElement *thisElement){
-    if (thisElement == NULL) {
-        return false;
-    }
+    if (thisElement == NULL) return false;
 
-    char recordLine[118];
-    char author[31];
-    char title[51];
-    char genre[31];
-    int year;
+    char recordLine[118] = "<NULL>";
+    char author[31] = "<NULL>";
+    char title[51] = "<NULL>";
+    char genre[31] = "<NULL>";
+    int year = 0;
 
     printHeader("Add meg az adatokat: Szerző|Cím|Műfaj|Kidási_év formában!    Visszalépéshez hagyd üresen és nyomj ENTER-t.");
     econio_normalmode();
@@ -105,7 +113,7 @@ bool modifyElement(listElement *thisElement){
     econio_gotoxy(10,47);
 
     /* Bekéri a módosítani kívánt könyv adatait. */
-    if (scanf("%[^\n]",recordLine) == 1 && strcmp(recordLine,"\n") != 0){
+    if (scanf("%[^\n]",recordLine) == 1){
         sscanf(recordLine,"%[^|]|%[^|]|%[^|]|%d",author,title,genre,&year);
 
         /* Létrehoz egy ideiglenes listaelemet a módosítás jóváhagyásának ellenőrzésére. */
@@ -134,8 +142,8 @@ bool modifyElement(listElement *thisElement){
 
 
 bool removeElement(listElement *thisElement){
-    if (!confirmAction(thisElement)) return false;
     if (thisElement == NULL) return false;
+    if (!confirmAction(thisElement)) return false;
 
     /* Kifűzi a listaelemet a listából, a pointerek megfelelő beállításával. */
     thisElement->previous->next = thisElement->next;

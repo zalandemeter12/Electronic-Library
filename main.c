@@ -10,7 +10,7 @@ int main() {
 
     econioInit();
 
-    list recordList = createList();
+    list *recordList = createList();
     loadDatabase(recordList);
 
     mainMenu(recordList);

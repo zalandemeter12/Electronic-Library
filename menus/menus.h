@@ -1,5 +1,5 @@
-#ifndef NAGYHAZI_MENUS_H
-#define NAGYHAZI_MENUS_H
+#ifndef MENUS_H
+#define MENUS_H
 
 #include "../definitions.h"
 
@@ -11,27 +11,27 @@ void printMenu (char **menuElements, int elementNumber, int selectedIndex, int x
  * lenyomásával teheti a felhasználó. A kiválasztott menüpont (rekord menü, adatbázis menü) újabb almenük függvényét hívja
  * meg. A kilépés menüpont kiválasztásakor a vüggvény visszatér. A menü megjelenítéséért egy ciklus felel, ami minden
  * futásakor beolvassa a leütött billentyűt és ez alapján hívja meg a megfelelő függvényeket. */
-void mainMenu(list recordList);
+void mainMenu(list *recordList);
 
 /* Megjeleníti a rekord menüt. Lehetővéteszi a menüpontok kiválasztását a fel le nyilakkal. A menüpont megnyitását az
  * ENTER lenyomásával teheti a felhasználó. A hozzáadás/törlés/módosítás kiválasztása esetén a függvény meghívja az
  * ezekért a feladatokért felelős függvényeket. A vissza választásakor vagy az ESC leütésekor a függvény visszatér a
  * főmenübe. A menü megjelenítéséért egy ciklus felel, ami minden futásakor beolvassa a leütött billentyűt és ez alapján
  * hívja meg a megfelelő függvényeket. */
-void recordMenu(list recordList);
+void recordMenu(list *recordList);
 
 /* Megjeleníti az adatbázis menüt. Lehetővéteszi a menüpontok kiválasztását a fel le nyilakkal. A menüpont megnyitását
  * az ENTER lenyomásával teheti a felhasználó. A keresés/kilistázás/mentés kiválasztása esetén a függvény meghívja az
  * ezekért a feladatokért felelős függvényeket. A vissza választásakor vagy az ESC leütésekor a függvény visszatér a
  * főmenübe. A menü megjelenítéséért egy ciklus felel, ami minden futásakor beolvassa a leütött billentyűt és ez alapján
  * hívja meg a megfelelő függvényeket. */
-void databaseMenu(list recordList);
+void databaseMenu(list *recordList);
 
 /* Megjeleníti a keresés menüt. Lehetővéteszi a menüpontok kiválasztását a fel le nyilakkal. A menüpont megnyitását az
  * ENTER lenyomásával teheti a felhasználó. A különböző keresések kiválasztása esetén a függvény meghívja az ezekért a
  * feladatokért felelős függvényeket. A vissza választásakor vagy az ESC leütésekor a függvény visszatér az adatbázis
  * menübe. A menü megjelenítéséért egy ciklus felel, ami minden futásakor beolvassa a leütött billentyűt és ez alapján
  * hívja meg a megfelelő függvényeket. */
-void searchMenu(list recordList);
+void searchMenu(list *recordList);
 
-#endif //NAGYHAZI_MENUS_H
+#endif //MENUS_H

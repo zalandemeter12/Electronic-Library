@@ -81,14 +81,14 @@ void printRecord(listElement *thisElement, int x, int y, int bgcolor){
     econio_gotoxy(x+138,y); printf("%d",thisElement->year);
 }
 
-void printFromTo(list thisList, int from, int to, int selected, int x, int y) {
+void printFromTo(list *thisList, int from, int to, int selected, int x, int y) {
     printBox(8,30,146,13,7);
 
     int counter = 0;
     int index = 0;
 
-    listElement *moving = thisList.first->next;
-    while (moving != thisList.last && counter <= to){
+    listElement *moving = thisList->first->next;
+    while (moving != thisList->last && counter <= to){
         if (counter >= from && counter <= to) {
             if (index == selected)
                 printRecord(moving,x,y+index,15);

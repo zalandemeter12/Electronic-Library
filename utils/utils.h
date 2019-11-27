@@ -1,5 +1,5 @@
-#ifndef NAGYHAZI_UTILS_H
-#define NAGYHAZI_UTILS_H
+#ifndef UTILS_H
+#define UTILS_H
 
 #include "../definitions.h"
 
@@ -26,11 +26,11 @@ void printRecord(listElement *thisElement, int x, int y, int bgcolor);
 
 /* Kiírja az adatbázis rekordjait egy eleje indextől egy vége indexig, paraméterként kapott koordinátán. A paraméterként
  * kapott kiválasztott elem indexén megjelenő elem háttérszíne előre definiáltan más, mint a többi rekord háttérszíne.*/
-void printFromTo(list thisList, int from, int to, int selected, int x, int y);
+void printFromTo(list *thisList, int from, int to, int selected, int x, int y);
 
 /* Kiírja a paraméterként kapott listaelemet a bemeneti sor helyén. És megkérdezi a felhasználót, hogy jóváhagyja-e az
  * adatot. ENTER leütésekor igaz értékkel tér vissza, ESC leütésekor hamis értékkel tér vissza. Mindaddig amíg a két
  * billentyű közül valamelyiket be nem olvassa a függvény addig nem tér vissza. */
 bool confirmAction(listElement *thisElement);
 
-#endif //NAGYHAZI_UTILS_H
+#endif //UTILS_H

@@ -1,14 +1,14 @@
-#ifndef NAGYHAZI_LISTS_H
-#define NAGYHAZI_LISTS_H
+#ifndef LISTS_H
+#define LISTS_H
 
 #include "../definitions.h"
 
 /* Létrehoz egy duplán láncolt strázsás listát és visszatér vele. A lista tartalmazza a benne tárolt elemeket határoló
  * strázsákra mutató pointereket. */
-list createList();
+list *createList();
 
 /* Felszabadítja a paraméterként kapott lista által lefoglalt memória területeket, törli a listát. */
-void removeList(list thisList);
+void removeList(list *thisList);
 
 /* Létrehoz egy új listaelemet, lefoglalja az ehhez szükséges memóriaterületeket és visszatér az új elemre mutató
  * pointerrel. Ha nem tudott memóriát foglalni NULL pointerrel tér vissza. */
@@ -20,14 +20,14 @@ listElement *newElement();
 listElement *copyElement(listElement *sourceElement);
 
 /* A paraméterként kapott listaelemet hozzáfűzi a szintén paraméterként kapott lista elejéhez. */
-void appendElementFirst(list thisList, listElement *thisElement);
+void appendElementFirst(list *thisList, listElement *thisElement);
 
 /* A paraméterként kapott listaelemet hozzáfűzi a szintén paraméterként kapott lista végéhez. */
-void appendElementLast(list thisList, listElement *thisElement);
+void appendElementLast(list *thisList, listElement *thisElement);
 
 /* Végig iterál a listán és visszatér a paraméterként átvett indexű elemre mutató pointerrel. Ha a kapott index túl nagy
  * NULL pointerrel tér vissza. */
-listElement *getNth(list thisList, int index);
+listElement *getNth(list *thisList, int index);
 
 /* Bekéri a felhasználótól a megváltoztatni kívánt adatokat, majd a felhasználó jóváhagyása után módosítja a
  * paraméterként kapott listaelem adatait. Hamis értékkel tér vissza ha a paraméterként kapott listaelemre mutató
@@ -39,4 +39,4 @@ bool modifyElement(listElement *thisElement);
  * tér vissza.*/
 bool removeElement(listElement *thisElement);
 
-#endif //NAGYHAZI_LISTS_H
+#endif //LISTS_H

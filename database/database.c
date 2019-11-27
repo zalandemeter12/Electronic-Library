@@ -6,7 +6,7 @@
 #include "../debugmalloc/debugmalloc.h"
 
 
-bool loadDatabase(list recordList) {
+bool loadDatabase(list *recordList) {
     FILE *fp;
     fp = fopen("../database/database.txt", "rt");
 
@@ -39,7 +39,7 @@ bool loadDatabase(list recordList) {
     return true;
 }
 
-bool saveDatabase(list recordList){
+bool saveDatabase(list *recordList){
     FILE* fp = fopen("../database/database.txt","wt");
 
     if (fp == NULL){
@@ -48,8 +48,8 @@ bool saveDatabase(list recordList){
     }
 
     /* Végig iterál a listán és minden rekordot kiír a fájlba. */
-    listElement *moving = recordList.first->next;
-    while (moving != recordList.last){
+    listElement *moving = recordList->first->next;
+    while (moving != recordList->last){
         fprintf(fp,"%s|%s|%s|%d\n",moving->author,moving->title,moving->genre,moving->year);
         moving = moving->next;
     }
@@ -58,12 +58,11 @@ bool saveDatabase(list recordList){
     return true;
 }
 
-void printDatabase(list recordList){
+void printDatabase(list *recordList){
     int key;
     int index = 0;
     int elementIndex = 0;
     bool quit = false;
-    listElement * moving;
 
     printFromTo(recordList,0,10,0,8,31);
     printHeader("Görgetés: ↑ ↓    Visszalépés: ESC");
@@ -77,13 +76,13 @@ void printDatabase(list recordList){
                 /* Ha a kijelölt elem nem a megjelenített 11 elem utolsó eleme. */
                 if (index != 10) {
                     /* Ha a kijelölt elem nem a lista utlosó eleme. */
-                    if (getNth(recordList,elementIndex) != recordList.last->previous){
+                    if (getNth(recordList,elementIndex) != recordList->last->previous){
                         index++; elementIndex++;
                         printFromTo(recordList,elementIndex-index,elementIndex-index+10,index,8,31);
                     }
                 } else {
                     /* Ha a kijelölt elem nem a lista utlosó eleme. */
-                    if (getNth(recordList,elementIndex) != recordList.last->previous){
+                    if (getNth(recordList,elementIndex) != recordList->last->previous){
                         elementIndex++;
                         printFromTo(recordList,elementIndex-10,elementIndex,index,8,31);
                     }
@@ -118,7 +117,7 @@ void printDatabase(list recordList){
     printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER    Visszalépés: ESC");
 }
 
-void searchDatabase(list recordList, searchCondition condition){
+void searchDatabase(list *recordList, searchCondition condition){
     char searchString[51];
     int searchYear;
 
@@ -127,19 +126,21 @@ void searchDatabase(list recordList, searchCondition condition){
     econio_normalmode();
     econio_textbackground(8); econio_textcolor(7);
     econio_gotoxy(8,47); printf("$  ");
-    econio_gotoxy(10,47); scanf("%[^\n]",searchString);
+    econio_gotoxy(10,47);
 
-    list searchList = createList();
+    int inputSuccess = scanf("%[^\n]",searchString);
+
+    list *searchList = createList();
     listElement *tempElement;
 
     /* Ha a keresett adat nem ürs, akkor végrehajtja a keresést. */
-    if (strlen(searchString) != 0){
+    if (inputSuccess == 1){
         econio_rawmode();
 
         /* Végig iterál a lista összes elemén és ellenőrzi a keresési feltételt, ha a feltétel teljesül, hozzáadja a
          * keresett elemekből álló listához. */
-        listElement *moving = recordList.first->next;
-        while (moving != recordList.last){
+        listElement *moving = recordList->first->next;
+        while (moving != recordList->last){
             switch (condition) {
                 case author:
                     if (strstr(moving->author,searchString) != NULL){
