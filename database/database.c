@@ -8,7 +8,7 @@
 
 bool loadDatabase(list *recordList) {
     FILE *fp;
-    fp = fopen("../database/database.txt", "rt");
+    fp = fopen("database/database.txt", "rt");
 
     if (fp == NULL){
         perror("Error: ");
@@ -40,7 +40,7 @@ bool loadDatabase(list *recordList) {
 }
 
 bool saveDatabase(list *recordList){
-    FILE* fp = fopen("../database/database.txt","wt");
+    FILE* fp = fopen("database/database.txt","wt");
 
     if (fp == NULL){
         perror("Error: ");
