@@ -1,6 +1,7 @@
 #ifndef MENUS_H
 #define MENUS_H
 
+#include <stdbool.h>
 #include "../definitions.h"
 
 /* Megjeleníti a paraméterként kapott sztringek tömbjét menüként. Szükséges paramétere a kilistázni kívánt menüpontok

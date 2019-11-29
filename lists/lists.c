@@ -44,9 +44,9 @@ listElement *newElement(){
 
     else {
         /* Inicializálja a létrehozott változó adatait. */
-        stpcpy(newElement->author,"<NULL>");
-        stpcpy(newElement->title,"<NULL>");
-        stpcpy(newElement->genre,"<NULL>");
+        strcpy(newElement->author,"<NULL>");
+        strcpy(newElement->title,"<NULL>");
+        strcpy(newElement->genre,"<NULL>");
         newElement->year = 0;
     }
 
@@ -62,9 +62,9 @@ listElement *copyElement(listElement *sourceElement){
     }
 
     /* Átmásolja a paraméterként kapott listaelem adatait a létrehozott listaelembe. */
-    stpcpy(newElement->author,sourceElement->author);
-    stpcpy(newElement->title,sourceElement->title);
-    stpcpy(newElement->genre,sourceElement->genre);
+    strcpy(newElement->author,sourceElement->author);
+    strcpy(newElement->title,sourceElement->title);
+    strcpy(newElement->genre,sourceElement->genre);
     newElement->year = sourceElement->year;
 
     return newElement;
@@ -108,12 +108,13 @@ bool modifyElement(listElement *thisElement){
 
     printHeader("Add meg az adatokat: Szerző|Cím|Műfaj|Kidási_év formában!    Visszalépéshez hagyd üresen és nyomj ENTER-t.");
     econio_normalmode();
-    econio_textbackground(8), econio_textcolor(7);
+    econio_textbackground(COL_DARKGRAY), econio_textcolor(COL_LIGHTGRAY);
     econio_gotoxy(8,47); printf("$  ");
     econio_gotoxy(10,47);
 
     /* Bekéri a módosítani kívánt könyv adatait. */
     if (scanf("%[^\n]",recordLine) == 1){
+        getchar();
         sscanf(recordLine,"%[^|]|%[^|]|%[^|]|%d",author,title,genre,&year);
 
         /* Létrehoz egy ideiglenes listaelemet a módosítás jóváhagyásának ellenőrzésére. */

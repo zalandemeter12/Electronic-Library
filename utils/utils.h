@@ -1,6 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <stdbool.h>
 #include "../definitions.h"
 
 /* Létrehozza a felhasználói felület megjelenítését és beállítja a megnyíló ablakot. */

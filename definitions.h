@@ -1,11 +1,6 @@
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdbool.h>
-
 /* Láncolt lista elemet definiál, ami tartalmazza egy könyv adatait (szerző, cím, műfaj, kiadási év). A szerző
  * maximum 30 karakter, a cím maximum 50 karakter, a műfaj maximum 30 karakter lehet. */
 typedef struct listElement {

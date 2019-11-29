@@ -1,6 +1,9 @@
 #ifndef LISTS_H
 #define LISTS_H
 
+#include <string.h>
+#include <stdlib.h>
+#include <stdbool.h>
 #include "../definitions.h"
 
 /* Létrehoz egy duplán láncolt strázsás listát és visszatér vele. A lista tartalmazza a benne tárolt elemeket határoló

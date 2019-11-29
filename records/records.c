@@ -14,13 +14,14 @@ bool addRecord(list *recordList){
 
     printHeader("Add meg az adatokat: Szerző|Cím|Műfaj|Kidási_év formában!    Visszalépéshez hagyd üresen és nyomj ENTER-t.");
     econio_normalmode();
-    econio_textbackground(8), econio_textcolor(7);
+    econio_textbackground(COL_DARKGRAY), econio_textcolor(COL_LIGHTGRAY);
     econio_gotoxy(8,47); printf("$  ");
     econio_gotoxy(10,47);
 
     /* Bekéri a hozzáadni kívánt könyv adatait. */
 
     if (scanf("%[^\n]",recordLine) == 1){
+        getchar();
         sscanf(recordLine,"%[^|]|%[^|]|%[^|]|%d",author,title,genre,&year);
 
         listElement *tempElement = newElement();
@@ -45,7 +46,7 @@ bool addRecord(list *recordList){
 
     printFromTo(recordList,0,10,-1,8,31);
     econio_rawmode();
-    printBox(0,46,162,3,8);
+    printBox(0,46,162,3,COL_DARKGRAY);
     printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER    Visszalépés: ESC");
     return true;
 }
@@ -63,8 +64,7 @@ bool modifyRecord(list *recordList){
     while (!quit){
         key = econio_getch();
         switch (key) {
-            /* LEFELE NYÍL */
-            case -21:
+            case KEY_DOWN:
                 /* Ha a kijelölt elem nem a megjelenített 11 elem utolsó eleme. */
                 if (index != 10) {
                     /* Ha a kijelölt elem nem a lista utlosó eleme. */
@@ -80,8 +80,7 @@ bool modifyRecord(list *recordList){
                     }
                 }
                 break;
-            /* FELFELE NYÍL */
-            case -20:
+            case KEY_UP:
                 /* Ha a kijelölt elem nem a megjelenített 11 elem első eleme. */
                 if (index != 0) {
                     /* Ha a kijelölt elem nem a lista első eleme. */
@@ -97,15 +96,13 @@ bool modifyRecord(list *recordList){
                     }
                 }
                 break;
-            /* ENTER */
-            case 10:
+            case KEY_ENTER:
                 success = modifyElement(getNth(recordList,elementIndex));
                 printFromTo(recordList,0,10,-1,8,31);
-                printBox(0,46,162,3,8);
+                printBox(0,46,162,3,COL_DARKGRAY);
                 quit = true;
                 break;
-            /* ESC */
-            case 27:
+            case KEY_ESCAPE:
                 printFromTo(recordList,0,10,-1,8,31);
                 quit = true;
                 break;
@@ -131,8 +128,7 @@ bool removeRecord(list *recordList){
     while (!quit){
         key = econio_getch();
         switch (key) {
-            /* FELFELE NYÍL */
-            case -21:
+            case KEY_UP:
                 /* Ha a kijelölt elem nem a megjelenített 11 elem utolsó eleme. */
                 if (index != 10) {
                     /* Ha a kijelölt elem nem a lista utlosó eleme. */
@@ -148,8 +144,7 @@ bool removeRecord(list *recordList){
                     }
                 }
                 break;
-            /* LEFELE NYÍL */
-            case -20:
+            case KEY_DOWN:
                 /* Ha a kijelölt elem nem a megjelenített 11 elem első eleme. */
                 if (index != 0) {
                     /* Ha a kijelölt elem nem a lista első eleme. */
@@ -165,15 +160,13 @@ bool removeRecord(list *recordList){
                     }
                 }
                 break;
-            /* ENTER */
-            case 10:
+            case KEY_ENTER:
                 success = removeElement(getNth(recordList,elementIndex));
                 printFromTo(recordList,0,10,-1,8,31);
-                printBox(0,46,162,3,8);
+                printBox(0,46,162,3,COL_DARKGRAY);
                 quit = true;
                 break;
-            /* ESC */
-            case 27:
+            case KEY_ESCAPE:
                 printFromTo(recordList,0,10,-1,8,31);
                 quit = true;
                 break;

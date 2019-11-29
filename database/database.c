@@ -71,8 +71,7 @@ void printDatabase(list *recordList){
     while (!quit){
         key = econio_getch();
         switch (key) {
-            /* LEFELE NYÍL */
-            case -21:
+            case KEY_DOWN:
                 /* Ha a kijelölt elem nem a megjelenített 11 elem utolsó eleme. */
                 if (index != 10) {
                     /* Ha a kijelölt elem nem a lista utlosó eleme. */
@@ -88,8 +87,7 @@ void printDatabase(list *recordList){
                     }
                 }
                 break;
-            /* FELFELE NYÍL */
-            case -20:
+            case KEY_UP:
                 /* Ha a kijelölt elem nem a megjelenített 11 elem első eleme. */
                 if (index != 0) {
                     /* Ha a kijelölt elem nem a lista első eleme. */
@@ -105,8 +103,7 @@ void printDatabase(list *recordList){
                     }
                 }
                 break;
-            /* ESC */
-            case 27:
+            case KEY_ESCAPE:
                 printFromTo(recordList,0,10,-1,8,31);
                 quit = true;
                 break;
@@ -124,12 +121,12 @@ void searchDatabase(list *recordList, searchCondition condition){
     printHeader("Add meg a keresni kívánt kifejezést!    Visszalépéshez hagyd üresen és nyomj ENTER-t.");
 
     econio_normalmode();
-    econio_textbackground(8); econio_textcolor(7);
+    econio_textbackground(COL_DARKGRAY); econio_textcolor(COL_LIGHTGRAY);
     econio_gotoxy(8,47); printf("$  ");
     econio_gotoxy(10,47);
 
     int inputSuccess = scanf("%[^\n]",searchString);
-
+    getchar();
     list *searchList = createList();
     listElement *tempElement;
 
@@ -180,7 +177,7 @@ void searchDatabase(list *recordList, searchCondition condition){
     }
 
     econio_rawmode();
-    printBox(0,46,162,3,8);
+    printBox(0,46,162,3,COL_DARKGRAY);
     printHeader("Menüpont kiválasztása: ↑ ↓    Menüpont megnyitása: ENTER     Visszalépés: ESC");
     removeList(searchList);
 }

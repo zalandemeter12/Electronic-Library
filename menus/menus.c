@@ -10,9 +10,9 @@ void printMenu (char **menuElements, int elementNumber, int selectedIndex, int x
     for (int index = 0; index < elementNumber; index++) {
         /* Beállítja a kiírt menüpont háttér és betűszínét aszerint, hogy melyik van kiválasztva. */
         if (index == selectedIndex){
-            econio_textbackground(7); econio_textcolor(0);
+            econio_textbackground(COL_LIGHTGRAY); econio_textcolor(COL_BLACK);
         } else{
-            econio_textbackground(8); econio_textcolor(7);
+            econio_textbackground(COL_DARKGRAY); econio_textcolor(COL_LIGHTGRAY);
         }
 
         /* Kiírja az adott menüpontot. */
@@ -36,20 +36,17 @@ void mainMenu(list *recordList){
     while (!quit){
         key = econio_getch();
         switch (key) {
-            /* LEFELE NYÍL */
-            case -21:
+            case KEY_DOWN:
                 /* Megnöveli a kijelölt elem indexét és kiírja az ehhez megfelelő menüt. */
                 if (index != 2) index++;
                 printMenu(menuElements, 3, index, 8, 17);
                 break;
-            /* FELFELE NYÍL */
-            case -20:
+            case KEY_UP:
                 /* Lecsökkenti a kijelölt elem indexét és kiírja az ehhez megfelelő menüt. */
                 if (index != 0) index--;
                 printMenu(menuElements, 3, index, 8, 17);
                 break;
-            /* ENTER */
-            case 10:
+            case KEY_ENTER:
                 /* Az aktuális index alapján meghívja a megfelelő függvényt, vagy igazra állítja a quit értékét. */
                 switch (index) {
                     case 0:
@@ -87,20 +84,17 @@ void recordMenu(list *recordList){
     while (!quit){
         key = econio_getch();
         switch (key) {
-            /* LEFELE NYÍL */
-            case -21:
+            case KEY_DOWN:
                 /* Megnöveli a kijelölt elem indexét és kiírja az ehhez megfelelő menüt. */
                 if (index != 3) index++;
                 printMenu(menuElements, 4, index, 32, 17);
                 break;
-            /* FELFELE NYÍL */
-            case -20:
+            case KEY_UP:
                 /* Lecsökkenti a kijelölt elem indexét és kiírja az ehhez megfelelő menüt. */
                 if (index != 0) index--;
                 printMenu(menuElements, 4, index, 32, 17);
                 break;
-            /* ENTER */
-            case 10:
+            case KEY_ENTER:
                 /* Az aktuális index alapján meghívja a megfelelő függvényt, vagy igazra állítja a quit értékét. */
                 switch (index) {
                     case 0:
@@ -117,17 +111,16 @@ void recordMenu(list *recordList){
                             modifyRecord(recordList);
                         break;
                     case 3:
-                        printBox(32,17,11,4,8);
+                        printBox(32,17,11,4,COL_DARKGRAY);
                         quit = true;
                         break;
                     default:
                         break;
                 }
                 break;
-            /* ESC */
-            case 27:
+            case KEY_ESCAPE:
                 /* Igazra állítja a quit értékét ami miatt vissza fog térni a függvény. */
-                printBox(32,17,11,4,8);
+                printBox(32,17,11,4,COL_DARKGRAY);
                 quit = true;
                 break;
             default:
@@ -152,18 +145,15 @@ void databaseMenu(list *recordList){
     while (!quit){
         key = econio_getch();
         switch (key) {
-            /* LEFELE NYÍL */
-            case -21:
+            case KEY_DOWN:
                 if (index != 3) index++;
                 printMenu(menuElements, 4, index, 32, 17);
                 break;
-            /* FELFELE NYÍL */
-            case -20:
+            case KEY_UP:
                 if (index != 0) index--;
                 printMenu(menuElements, 4, index, 32, 17);
                 break;
-            /* ENTER */
-            case 10:
+            case KEY_ENTER:
                 /* Az aktuális index alapján meghívja a megfelelő függvényt, vagy igazra állítja a quit értékét. */
                 switch (index) {
                     case 0:
@@ -174,21 +164,20 @@ void databaseMenu(list *recordList){
                         break;
                     case 2:
                         saveDatabase(recordList);
-                        printBox(32,17,12,4,8);
+                        printBox(32,17,12,4,COL_DARKGRAY);
                         quit = true;
                         break;
                     case 3:
-                        printBox(32,17,12,4,8);
+                        printBox(32,17,12,4,COL_DARKGRAY);
                         quit = true;
                         break;
                     default:
                         break;
                 }
                 break;
-            /* ESC */
-            case 27:
+            case KEY_ESCAPE:
                 /* Igazra állítja a quit értékét ami miatt vissza fog térni a függvény. */
-                printBox(32,17,12,4,8);
+                printBox(32,17,12,4,COL_DARKGRAY);
                 quit = true;
                 break;
             default:
@@ -213,18 +202,15 @@ void searchMenu(list *recordList){
     while (!quit){
         key = econio_getch();
         switch (key) {
-            /* LEFELE NYÍL */
-            case -21:
+            case KEY_DOWN:
                 if (index != 4) index++;
                 printMenu(menuElements, 5, index, 52, 17);
                 break;
-            /* FELFELE NYÍL */
-            case -20:
+            case KEY_UP:
                 if (index != 0) index--;
                 printMenu(menuElements, 5, index, 52, 17);
                 break;
-            /* ENTER */
-            case 10:
+            case KEY_ENTER:
                 /* Az aktuális index alapján meghívja a megfelelő függvényt, vagy igazra állítja a quit értékét. */
                 switch (index) {
                     case 0:
@@ -240,17 +226,16 @@ void searchMenu(list *recordList){
                         searchDatabase(recordList,year);
                         break;
                     case 4:
-                        printBox(52,17,20,5,8);
+                        printBox(52,17,20,5,COL_DARKGRAY);
                         quit = true;
                         break;
                     default:
                         break;
                 }
                 break;
-            /* ESC */
-            case 27:
+            case KEY_ESCAPE:
                 /* Igazra állítja a quit értékét ami miatt vissza fog térni a függvény. */
-                printBox(52,17,20,5,8);
+                printBox(52,17,20,5,COL_DARKGRAY);
                 quit = true;
                 break;
             default:

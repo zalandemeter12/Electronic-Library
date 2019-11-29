@@ -1,6 +1,8 @@
 #ifndef RECORDS_H
 #define RECORDS_H
 
+#include <string.h>
+#include <stdbool.h>
 #include "../definitions.h"
 
 /* Bekéri a felhasználótól egy könyv adatait, majd hozzáfűzi az így létrehozott listaelemet a paraméterként kapott lista
