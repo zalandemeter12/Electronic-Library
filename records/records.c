@@ -128,7 +128,7 @@ bool removeRecord(list *recordList){
     while (!quit){
         key = econio_getch();
         switch (key) {
-            case KEY_UP:
+            case KEY_DOWN:
                 /* Ha a kijelölt elem nem a megjelenített 11 elem utolsó eleme. */
                 if (index != 10) {
                     /* Ha a kijelölt elem nem a lista utlosó eleme. */
@@ -144,7 +144,7 @@ bool removeRecord(list *recordList){
                     }
                 }
                 break;
-            case KEY_DOWN:
+            case KEY_UP:
                 /* Ha a kijelölt elem nem a megjelenített 11 elem első eleme. */
                 if (index != 0) {
                     /* Ha a kijelölt elem nem a lista első eleme. */
